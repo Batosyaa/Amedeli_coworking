@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMIDELI HUB</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+        <img class="logo-photo" src="C:\Users\Admin\OneDrive\Рабочий стол\Project_coworking\Amedeli_coworking\photo\logo_fig.png" alt="☘">
+            AMIDELI HUB
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" data-ru="Главная" data-kz="Басты" data-en="Home">Главная</a></li>
+            <li><a href="#facilities" data-ru="Услуги" data-kz="Қызметтер" data-en="Services">Услуги</a></li>
+            <li><a href="#booking" data-ru="Бронирование" data-kz="Брондау" data-en="Booking">Бронирование</a></li>
+            <li><a href="#menu" data-ru="Меню" data-kz="Мәзір" data-en="Menu">Меню</a></li>
+            <li><a href="#contact" data-ru="Контакты" data-kz="Байланыс" data-en="Contact">Контакты</a></li>
+            <li>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" onclick="switchLang('ru')">RU</button>
+                    <button class="lang-btn" onclick="switchLang('kz')">KZ</button>
+                    <button class="lang-btn" onclick="switchLang('en')">EN</button>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content" data-aos="fade-left">
+            <h1 data-ru="Пространство для роста вашего бизнеса" data-kz="Бизнесіңізді дамыту кеңістігі" data-en="Space for your business growth">Пространство для роста вашего бизнеса</h1>
+            <p data-ru="Современный коворкинг-центр с конференц-залами, контент-студией и уютным кафе. Работаем с 09:00 до 22:00" data-kz="Конференц-залдары, контент-студиясы және жайлы кафесі бар заманауи коворкинг орталығы. 09:00-ден 22:00-ге дейін жұмыс істейміз" data-en="Modern coworking center with conference rooms, content studio and cozy cafe. Open from 09:00 to 22:00">
+                Современный коворкинг-центр с конференц-залами, контент-студией и уютной кофейней.
+            </p>
+            <div class="hero-buttons">
+                <a href="#booking" class="btn btn-primary" data-ru="Забронировать" data-kz="Броньдау" data-en="Book Now">Забронировать</a>
+                <a href="#facilities" class="btn btn-secondary" data-ru="Узнать больше" data-kz="Толығырақ" data-en="Learn More">Узнать больше</a>
+            </div>
+            <div class="hero-stats" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label" data-ru="Посадочных мест" data-kz="Отыратын орын" data-en="Seats">Посадочных мест</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label" data-ru="Зон для съемки" data-kz="Түсірілім аймағы" data-en="Shooting Zones">Зон для съемки</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">13</div>
+                    <div class="stat-label" data-ru="Часов работы" data-kz="Жұмыс сағаты" data-en="Working Hours">Часов работы</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image" data-aos="fade-left">
+            <!-- Placeholder for hero image -->
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section id="facilities">
+        <h2 class="section-title" data-ru="Наши услуги" data-kz="Біздің қызметтер" data-en="Our Services">Наши услуги</h2>
+        <p class="section-subtitle" data-ru="Полный спектр услуг для комфортной работы и проведения мероприятий" data-kz="Жұмыс пен іс-шараларды өткізу үшін қызметтердің толық спектрі" data-en="Full range of services for comfortable work and events">
+            Полный спектр услуг для комфортной работы и проведения мероприятий
+        </p>
+
+        <div class="facilities-grid">
+            <div class="facility-card" data-aos="fade-up">
+                <div class="facility-icon">🏛️</div>
+                <h3 data-ru="Конференц-зал" data-kz="Конференц-зал" data-en="Conference Hall">Конференц-зал</h3>
+                <p data-ru="Вместимость до 30 человек" data-kz="30 адамға дейін" data-en="Up to 30 people">Вместимость до 30 человек</p>
+                <div class="facility-price">10,000₸/<span data-ru="час" data-kz="сағат" data-en="hour">час</span></div>
+                <ul class="facility-features">
+                    <li data-ru="Флипчарт" data-kz="Флипчарт" data-en="Flipchart">✓ Флипчарт</li>
+                    <li data-ru="Проектор" data-kz="Проектор" data-en="Projector">✓ Проектор</li>
+                    <li data-ru="Интерактивная доска" data-kz="Интерактивті тақта" data-en="Interactive Board">✓ Интерактивная доска</li>
+                    <li data-ru="Кликер" data-kz="Кликер" data-en="Clicker">✓ Кликер</li>
+                </ul>
+            </div>
+
+            <div class="facility-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="facility-icon">🎥</div>
+                <h3 data-ru="Контент-студия" data-kz="Контент-студия" data-en="Content Studio">Контент-студия</h3>
+                <p data-ru="Профессиональное оборудование для съемок" data-kz="Түсірілімге арналған кәсіби жабдық" data-en="Professional shooting equipment">Профессиональное оборудование для съемок</p>
+                <div class="facility-price">8,000₸ - 10,000₸/<span data-ru="час" data-kz="сағат" data-en="hour">час</span></div>
+                <ul class="facility-features">
+                    <li data-ru="Два софтбокса Godox" data-kz="Екі Godox софтбоксы" data-en="Two Godox Softboxes">✓ Два софтбокса Godox</li>
+                    <li data-ru="Штатив" data-kz="Штатив" data-en="Tripod">✓ Штатив</li>
+                    <li data-ru="Контурный свет" data-kz="Контурлық жарық" data-en="Contour Light">✓ Контурный свет</li>
+                    <li data-ru="7 зон для съемок" data-kz="Түсірілімге 7 аймақ" data-en="7 Shooting Zones">✓ 7 зон для съемок</li>
+                    <li data-ru="Петличка" data-kz="Петличка" data-en="Lavalier Mic">✓ Петличка</li>
+                </ul>
+            </div>
+
+            <div class="facility-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="facility-icon">💼</div>
+                <h3 data-ru="Переговорные комнаты" data-kz="Келіссөз бөлмелері" data-en="Meeting Rooms">Переговорные комнаты</h3>
+                <p data-ru="4 уютные комнаты для встреч" data-kz="Кездесулер үшін 4 жайлы бөлме" data-en="4 cozy rooms for meetings">4 уютные комнаты для встреч</p>
+                <div class="facility-price">3,000₸/<span data-ru="час" data-kz="сағат" data-en="hour">час</span></div>
+                <ul class="facility-features">
+                    <li data-ru="Почасовая аренда" data-kz="Сағатына жалға алу" data-en="Hourly Rental">✓ Почасовая аренда</li>
+                    <li data-ru="Комфортная обстановка" data-kz="Жайлы орта" data-en="Comfortable Setting">✓ Комфортная обстановка</li>
+                    <li data-ru="Wi-Fi и розетки" data-kz="Wi-Fi және розеткалар" data-en="Wi-Fi & Outlets">✓ Wi-Fi и розетки</li>
+                </ul>
+            </div>
+
+            <div class="facility-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="facility-icon">☕</div>
+                <h3 data-ru="Кофейня" data-kz="Кофехана" data-en="Coffee Shop">Кофейня</h3>
+                <p data-ru="Свежий кофе и закуски" data-kz="Жаңа кофе және тағамдар" data-en="Fresh coffee and snacks">Свежий кофе и закуски</p>
+                <div class="facility-price" data-ru="От 690₸" data-kz="690₸-тен" data-en="From 690₸">От 690₸</div>
+                <ul class="facility-features">
+                    <li data-ru="Авторские напитки" data-kz="Авторлық сусындар" data-en="Signature Drinks">✓ Авторские напитки</li>
+                    <li data-ru="Свежая выпечка" data-kz="Жаңа пісірілген тағамдар" data-en="Fresh Pastries">✓ Свежая выпечка</li>
+                    <li data-ru="Лимонады и чаи" data-kz="Лимонадтар және шайлар" data-en="Lemonades & Teas">✓ Лимонады и чаи</li>
+                </ul>
+            </div>
+
+            <div class="facility-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="facility-icon">💻</div>
+                <h3 data-ru="Коворкинг-зона" data-kz="Коворкинг аймағы" data-en="Coworking Zone">Коворкинг-зона</h3>
+                <p data-ru="5 индивидуальных рабочих мест" data-kz="5 жеке жұмыс орны" data-en="5 individual workspaces">5 индивидуальных рабочих мест</p>
+                <div class="facility-price" data-ru="Свободный доступ" data-kz="Еркін қол жеткізу" data-en="Free Access">Свободный доступ</div>
+                <ul class="facility-features">
+                    <li data-ru="Комфортное рабочее место" data-kz="Жайлы жұмыс орны" data-en="Comfortable Workspace">✓ Комфортное рабочее место</li>
+                    <li data-ru="Высокоскоростной Wi-Fi" data-kz="Жоғары жылдамдықты Wi-Fi" data-en="High-Speed Wi-Fi">✓ Высокоскоростной Wi-Fi</li>
+                    <li data-ru="Розетки и зарядки" data-kz="Розеткалар және зарядтау" data-en="Outlets & Charging">✓ Розетки и зарядки</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking">
+        <h2 class="section-title" data-ru="Бронирование" data-kz="Брондау" data-en="Booking">Бронирование</h2>
+        <p class="section-subtitle" data-ru="Выберите удобное время и отправьте заявку" data-kz="Ыңғайлы уақытты таңдап, өтінім жіберіңіз" data-en="Choose a convenient time and send a request">
+            Выберите удобное время и отправьте заявку
+        </p>
+
+        <div class="booking-section" data-aos="fade-up">
+            <!-- Room Selector -->
+            <div class="room-selector">
+                <button class="room-btn active" onclick="selectRoom('conference')" data-ru="Конференц-зал" data-kz="Конференц-зал" data-en="Conference Hall">Конференц-зал</button>
+                <button class="room-btn" onclick="selectRoom('studio')" data-ru="Контент-студия" data-kz="Контент-студия" data-en="Content Studio">Контент-студия</button>
+                <button class="room-btn" onclick="selectRoom('meeting')" data-ru="Переговорная" data-kz="Келіссөз бөлмесі" data-en="Meeting Room">Переговорная</button>
+            </div>
+
+            <!-- Timetable -->
+            <div class="timetable-container">
+                <h3 class="text-center mb-2" data-ru="Расписание на неделю" data-kz="Апта кестесі" data-en="Weekly Schedule">Расписание на неделю</h3>
+                <div class="timetable">
+                    <div class="timetable-grid" id="timetableGrid">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Form -->
+            <form class="booking-form" id="bookingForm">
+                <div class="success-message" id="successMessage">
+                    <span data-ru="✓ Ваша заявка успешно отправлена! Мы свяжемся с вами в WhatsApp" data-kz="✓ Өтінім сәтті жіберілді! Біз сізбен WhatsApp арқылы хабарласамыз" data-en="✓ Your request has been sent successfully! We will contact you via WhatsApp">
+                        ✓ Ваша заявка успешно отправлена! Мы свяжемся с вами в WhatsApp
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label data-ru="Ваше имя *" data-kz="Атыңыз *" data-en="Your Name *">Ваше имя *</label>
+                    <input type="text" id="clientName" required>
+                </div>
+
+                <div class="form-group">
+                    <label data-ru="Номер телефона (WhatsApp) *" data-kz="Телефон нөмірі (WhatsApp) *" data-en="Phone Number (WhatsApp) *">Номер телефона (WhatsApp) *</label>
+                    <input type="tel" id="clientPhone" required placeholder="+7 (___) ___-__-__">
+                </div>
+
+                <div class="form-group">
+                    <label data-ru="Email" data-kz="Email" data-en="Email">Email</label>
+                    <input type="email" id="clientEmail">
+                </div>
+
+                <div class="form-group">
+                    <label data-ru="Количество человек" data-kz="Адам саны" data-en="Number of People">Количество человек</label>
+                    <input type="number" id="guestCount" min="1" max="30" value="1">
+                </div>
+
+                <div class="form-group">
+                    <label data-ru="Выбранная комната" data-kz="Таңдалған бөлме" data-en="Selected Room">Выбранная комната</label>
+                    <input type="text" id="selectedRoom" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label data-ru="Выбранное время" data-kz="Таңдалған уақыт" data-en="Selected Time">Выбранное время</label>
+                    <input type="text" id="selectedTime" readonly>
+                </div>
+
+                <div class="form-group full-width">
+                    <label data-ru="Дополнительные пожелания" data-kz="Қосымша тілектер" data-en="Additional Requests">Дополнительные пожелания</label>
+                    <textarea id="additionalNotes" rows="3"></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label data-ru="Предзаказ из меню (опционально)" data-kz="Мәзірден алдын ала тапсырыс (қалауыңызша)" data-en="Pre-order from Menu (Optional)">Предзаказ из меню (опционально)</label>
+                    <div class="menu-preorder" id="menuPreorder">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;" data-ru="Отправить заявку" data-kz="Өтінім жіберу" data-en="Send Request">Отправить заявку</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <h2 class="section-title" data-ru="Меню кофейни" data-kz="Кофехана мәзірі" data-en="Coffee Shop Menu">Меню кофейни</h2>
+        <p class="section-subtitle" data-ru="Свежий кофе, авторские напитки и вкусные закуски" data-kz="Жаңа кофе, авторлық сусындар және дәмді тағамдар" data-en="Fresh coffee, signature drinks and delicious snacks">
+            Свежий кофе, авторские напитки и вкусные закуски
+        </p>
+
+        <div class="menu-grid">
+            <div class="menu-category" data-aos="fade-up">
+                <h3 data-ru="Кофе" data-kz="Кофе" data-en="Coffee">Кофе</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Американо" data-kz="Американо" data-en="Americano">Американо</div>
+                        <div class="menu-sizes">350мл | 450мл</div>
+                    </div>
+                    <div class="menu-item-price">790₸ / 990₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Капучино" data-kz="Капучино" data-en="Cappuccino">Капучино</div>
+                        <div class="menu-sizes">350мл | 450мл</div>
+                    </div>
+                    <div class="menu-item-price">990₸ / 1190₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name">Латте</div>
+                        <div class="menu-sizes">350мл | 450мл</div>
+                    </div>
+                    <div class="menu-item-price">990₸ / 1190₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Какао" data-kz="Какао" data-en="Cocoa">Какао</div>
+                        <div class="menu-sizes">350мл | 450мл</div>
+                    </div>
+                    <div class="menu-item-price">990₸ / 1190₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Раф" data-kz="Раф" data-en="Raf">Раф</div>
+                        <div class="menu-sizes">350мл | 450мл</div>
+                    </div>
+                    <div class="menu-item-price">1190₸ / 1290₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Эспрессо" data-kz="Эспрессо" data-en="Espresso">Эспрессо</div>
+                        <div class="menu-sizes">Single | Double</div>
+                    </div>
+                    <div class="menu-item-price">690₸ / 790₸</div>
+                </div>
+            </div>
+
+            <div class="menu-category" data-aos="fade-up" data-aos-delay="100">
+                <h3 data-ru="Чай" data-kz="Шай" data-en="Tea">Чай</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Черный" data-kz="Қара шай" data-en="Black Tea">Черный</div>
+                        <div class="menu-sizes">450мл | 1л | 1.5л</div>
+                    </div>
+                    <div class="menu-item-price">390₸ / 990₸ / 1190₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Зеленый" data-kz="Жасыл шай" data-en="Green Tea">Зеленый</div>
+                        <div class="menu-sizes">450мл | 1л | 1.5л</div>
+                    </div>
+                    <div class="menu-item-price">390₸ / 990₸ / 1190₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="С лимоном" data-kz="Лимонмен" data-en="With Lemon">С лимоном</div>
+                        <div class="menu-sizes">450мл | 1л | 1.5л</div>
+                    </div>
+                    <div class="menu-item-price">490₸ / 990₸ / 1190₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="С молоком" data-kz="Сүтпен" data-en="With Milk">С молоком</div>
+                        <div class="menu-sizes">450мл | 1л | 1.5л</div>
+                    </div>
+                    <div class="menu-item-price">490₸ / 990₸ / 1190₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Молочный улун" data-kz="Сүтті улун" data-en="Milk Oolong">Молочный улун</div>
+                        <div class="menu-sizes">450мл | 1л | 1.5л</div>
+                    </div>
+                    <div class="menu-item-price">590₸ / 1190₸ / 1290₸</div>
+                </div>
+            </div>
+
+            <div class="menu-category" data-aos="fade-up" data-aos-delay="200">
+                <h3 data-ru="Холодный кофе" data-kz="Суық кофе" data-en="Iced Coffee">Холодный кофе</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Ice Американо" data-kz="Ice Американо" data-en="Ice Americano">Ice Американо</div>
+                        <div class="menu-sizes">350мл | 450мл</div>
+                    </div>
+                    <div class="menu-item-price">1090₸ / 1290₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Ice Капучино" data-kz="Ice Капучино" data-en="Ice Cappuccino">Ice Капучино</div>
+                        <div class="menu-sizes">350мл | 450мл</div>
+                    </div>
+                    <div class="menu-item-price">1090₸ / 1290₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name">Ice Латте</div>
+                        <div class="menu-sizes">350мл | 450мл</div>
+                    </div>
+                    <div class="menu-item-price">1090₸ / 1290₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name">Ice tea</div>
+                        <div class="menu-sizes">350мл | 450мл</div>
+                    </div>
+                    <div class="menu-item-price">1090₸ / 1290₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name">Bumble coffee</div>
+                        <div class="menu-sizes">350мл | 450мл</div>
+                    </div>
+                    <div class="menu-item-price">1090₸ / 1290₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Милкшейк" data-kz="Милкшейк" data-en="Milkshake">Милкшейк</div>
+                        <div class="menu-sizes">350мл | 450мл</div>
+                    </div>
+                    <div class="menu-item-price">1090₸ / 1290₸</div>
+                </div>
+            </div>
+
+            <div class="menu-category" data-aos="fade-up" data-aos-delay="300">
+                <h3 data-ru="Авторские чаи" data-kz="Авторлық шайлар" data-en="Signature Teas">Авторские чаи</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Ташкентский" data-kz="Ташкенттік" data-en="Tashkent">Ташкентский</div>
+                        <div class="menu-sizes">450мл | 1л | 1.5л</div>
+                    </div>
+                    <div class="menu-item-price">890₸ / 1490₸ / 1990₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Марокканский" data-kz="Мароккандық" data-en="Moroccan">Марокканский</div>
+                        <div class="menu-sizes">450мл | 1л | 1.5л</div>
+                    </div>
+                    <div class="menu-item-price">890₸ / 1490₸ / 1990₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Облепиховый" data-kz="Қарақаттық" data-en="Sea Buckthorn">Облепиховый</div>
+                        <div class="menu-sizes">450мл | 1л | 1.5л</div>
+                    </div>
+                    <div class="menu-item-price">890₸ / 1490₸ / 1990₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Ягодный" data-kz="Жидектік" data-en="Berry">Ягодный</div>
+                        <div class="menu-sizes">450мл | 1л | 1.5л</div>
+                    </div>
+                    <div class="menu-item-price">890₸ / 1490₸ / 1990₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Манго маракуя" data-kz="Манго маракуя" data-en="Mango Passion Fruit">Манго маракуя</div>
+                        <div class="menu-sizes">450мл | 1л | 1.5л</div>
+                    </div>
+                    <div class="menu-item-price">890₸ / 1490₸ / 1990₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Глинтвейн" data-kz="Глинтвейн" data-en="Mulled Wine">Глинтвейн</div>
+                        <div class="menu-sizes">450мл | 1л | 1.5л</div>
+                    </div>
+                    <div class="menu-item-price">890₸ / 1490₸ / 1990₸</div>
+                </div>
+            </div>
+
+            <div class="menu-category" data-aos="fade-up" data-aos-delay="400">
+                <h3 data-ru="Лимонады" data-kz="Лимонадтар" data-en="Lemonades">Лимонады</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Мохито" data-kz="Мохито" data-en="Mojito">Мохито</div>
+                        <div class="menu-sizes">450мл | 1л</div>
+                    </div>
+                    <div class="menu-item-price">1190₸ / 1990₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Цитрусовый" data-kz="Цитрустық" data-en="Citrus">Цитрусовый</div>
+                        <div class="menu-sizes">450мл | 1л</div>
+                    </div>
+                    <div class="menu-item-price">1190₸ / 1990₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Ягодный" data-kz="Жидектік" data-en="Berry">Ягодный</div>
+                        <div class="menu-sizes">450мл | 1л</div>
+                    </div>
+                    <div class="menu-item-price">1190₸ / 1990₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Малиновый" data-kz="Таңқурайлық" data-en="Raspberry">Малиновый</div>
+                        <div class="menu-sizes">450мл | 1л</div>
+                    </div>
+                    <div class="menu-item-price">1190₸ / 1990₸</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="menu-item-name" data-ru="Манго-маракуя" data-kz="Манго-маракуя" data-en="Mango-Passion Fruit">Манго-маракуя</div>
+                        <div class="menu-sizes">450мл | 1л</div>
+                    </div>
+                    <div class="menu-item-price">1190₸ / 1990₸</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title" data-ru="Контакты" data-kz="Байланыс" data-en="Contact">Контакты</h2>
+        <div class="footer-content">
+            <div class="footer-section" data-aos="fade-up">
+                <h4 data-ru="Адрес" data-kz="Мекенжай" data-en="Address">Адрес</h4>
+                <p data-ru="г. Астана, [Ваш адрес]" data-kz="Астана қ., [Сіздің мекенжайыңыз]" data-en="Astana, [Your Address]">г. Астана, [Ваш адрес]</p>
+            </div>
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="100">
+                <h4 data-ru="Режим работы" data-kz="Жұмыс уақыты" data-en="Working Hours">Режим работы</h4>
+                <p data-ru="Ежедневно: 09:00 - 22:00" data-kz="Күн сайын: 09:00 - 22:00" data-en="Daily: 09:00 - 22:00">Ежедневно: 09:00 - 22:00</p>
+            </div>
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="200">
+                <h4 data-ru="Телефон" data-kz="Телефон" data-en="Phone">Телефон</h4>
+                <a href="tel:+77001234567">+7 (700) 123-45-67</a>
+                <a href="https://wa.me/77001234567" target="_blank">WhatsApp</a>
+            </div>
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="300">
+                <h4 data-ru="Социальные сети" data-kz="Әлеуметтік желілер" data-en="Social Media">Социальные сети</h4>
+                <div class="social-links">
+                    <a href="#" target="_blank">📱</a>
+                    <a href="#" target="_blank">📷</a>
+                    <a href="#" target="_blank">▶️</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2024 AMIDELI HUB. <span data-ru="Все права защищены" data-kz="Барлық құқықтар қорғалған" data-en="All rights reserved">Все права защищены</span>.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Language Switcher
+        let currentLang = 'ru';
+
+        function switchLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('[data-ru]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Room Booking System
+        let selectedRoom = 'conference';
+        let selectedSlots = [];
+
+        const roomData = {
+            conference: { 
+                name: { ru: 'Конференц-зал', kz: 'Конференц-зал', en: 'Conference Hall' },
+                price: '10,000₸'
+            },
+            studio: { 
+                name: { ru: 'Контент-студия', kz: 'Контент-студия', en: 'Content Studio' },
+                price: '8,000₸ - 10,000₸'
+            },
+            meeting: { 
+                name: { ru: 'Переговорная', kz: 'Келіссөз бөлмесі', en: 'Meeting Room' },
+                price: '3,000₸'
+            }
+        };
+
+        function selectRoom(room) {
+            selectedRoom = room;
+            document.querySelectorAll('.room-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('selectedRoom').value = roomData[room].name[currentLang];
+            generateTimetable();
+        }
+
+        // Generate Timetable
+        function generateTimetable() {
+            const days = {
+                ru: ['Время', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+                kz: ['Уақыт', 'Дс', 'Сс', 'Ср', 'Бс', 'Жм', 'Сб', 'Жс'],
+                en: ['Time', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            };
+            
+            const hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
+            
+            const grid = document.getElementById('timetableGrid');
+            grid.innerHTML = '';
+
+            // Header row
+            days[currentLang].forEach((day, index) => {
+                const cell = document.createElement('div');
+                cell.className = index === 0 ? 'time-header' : 'day-header';
+                cell.textContent = day;
+                grid.appendChild(cell);
+            });
+
+            // Time slots
+            hours.forEach(hour => {
+                // Time label
+                const timeLabel = document.createElement('div');
+                timeLabel.className = 'time-header';
+                timeLabel.textContent = hour;
+                grid.appendChild(timeLabel);
+
+                // Day slots
+                for (let day = 1; day <= 7; day++) {
+                    const slot = document.createElement('div');
+                    slot.className = 'time-slot available';
+                    slot.dataset.day = day;
+                    slot.dataset.hour = hour;
+                    slot.dataset.room = selectedRoom;
+                    
+                    // Random booking simulation (you'll replace this with real data)
+                    if (Math.random() > 0.7) {
+                        slot.classList.remove('available');
+                        slot.classList.add('booked');
+                    }
+                    
+                    slot.addEventListener('click', function() {
+                        if (!this.classList.contains('booked')) {
+                            this.classList.toggle('selected');
+                            updateSelectedSlots();
+                        }
+                    });
+                    
+                    grid.appendChild(slot);
+                }
+            });
+        }
+
+        function updateSelectedSlots() {
+            selectedSlots = [];
+            document.querySelectorAll('.time-slot.selected').forEach(slot => {
+                selectedSlots.push({
+                    day: slot.dataset.day,
+                    hour: slot.dataset.hour,
+                    room: slot.dataset.room
+                });
+            });
+            
+            const days = {
+                ru: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
+                kz: ['Дүйсенбі', 'Сейсенбі', 'Сәрсенбі', 'Бейсенбі', 'Жұма', 'Сенбі', 'Жексенбі'],
+                en: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+            };
+            
+            const timeText = selectedSlots.map(slot => 
+                `${days[currentLang][slot.day - 1]}, ${slot.hour}`
+            ).join('; ');
+            
+            document.getElementById('selectedTime').value = timeText || (currentLang === 'ru' ? 'Не выбрано' : currentLang === 'kz' ? 'Таңдалмаған' : 'Not selected');
+        }
+
+        // Generate Menu Pre-order Options
+        function generateMenuPreorder() {
+            const menuItems = [
+                { name: { ru: 'Американо', kz: 'Американо', en: 'Americano' }, price: '790₸' },
+                { name: { ru: 'Капучино', kz: 'Капучино', en: 'Cappuccino' }, price: '990₸' },
+                { name: { ru: 'Латте', kz: 'Латте', en: 'Latte' }, price: '990₸' },
+                { name: { ru: 'Эспрессо', kz: 'Эспрессо', en: 'Espresso' }, price: '690₸' },
+                { name: { ru: 'Черный чай', kz: 'Қара шай', en: 'Black Tea' }, price: '390₸' },
+                { name: { ru: 'Зеленый чай', kz: 'Жасыл шай', en: 'Green Tea' }, price: '390₸' },
+                { name: { ru: 'Мохито', kz: 'Мохито', en: 'Mojito' }, price: '1190₸' },
+                { name: { ru: 'Цитрусовый лимонад', kz: 'Цитрустық лимонад', en: 'Citrus Lemonade' }, price: '1190₸' }
+            ];
+
+            const container = document.getElementById('menuPreorder');
+            container.innerHTML = '';
+
+            menuItems.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'checkbox-item';
+                div.innerHTML = `
+                    <input type="checkbox" id="menu_${index}" name="menu_preorder" value="${item.name.ru}">
+                    <label for="menu_${index}">${item.name[currentLang]} (${item.price})</label>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Form Submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = {
+                name: document.getElementById('clientName').value,
+                phone: document.getElementById('clientPhone').value,
+                email: document.getElementById('clientEmail').value,
+                guestCount: document.getElementById('guestCount').value,
+                room: document.getElementById('selectedRoom').value,
+                time: document.getElementById('selectedTime').value,
+                notes: document.getElementById('additionalNotes').value,
+                menu: Array.from(document.querySelectorAll('input[name="menu_preorder"]:checked'))
+                    .map(cb => cb.value).join(', ')
+            };
+
+            // Validate
+            if (!formData.name || !formData.phone) {
+                alert(currentLang === 'ru' ? 'Пожалуйста, заполните все обязательные поля' : 
+                      currentLang === 'kz' ? 'Барлық міндетті өрістерді толтырыңыз' : 
+                      'Please fill in all required fields');
+                return;
+            }
+
+            if (selectedSlots.length === 0) {
+                alert(currentLang === 'ru' ? 'Пожалуйста, выберите время' : 
+                      currentLang === 'kz' ? 'Уақытты таңдаңыз' : 
+                      'Please select time slots');
+                return;
+            }
+
+            // Here you would send the email via EmailJS or backend
+            console.log('Booking Data:', formData);
+
+            // Show success message
+            document.getElementById('successMessage').classList.add('show');
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                this.reset();
+                document.getElementById('successMessage').classList.remove('show');
+                document.querySelectorAll('.time-slot.selected').forEach(slot => {
+                    slot.classList.remove('selected');
+                });
+                selectedSlots = [];
+            }, 3000);
+
+            // In production, you would redirect to WhatsApp or send email here
+            // window.open(`https://wa.me/77001234567?text=${encodeURIComponent('Заявка на бронирование...')}`, '_blank');
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            generateTimetable();
+            generateMenuPreorder();
+            document.getElementById('selectedRoom').value = roomData[selectedRoom].name[currentLang];
+        });
+
+        // Update content when language changes
+        function switchLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('[data-ru]').forEach(el => {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    if (el.placeholder) el.placeholder = el.getAttribute(`data-${lang}`);
+                } else {
+                    el.textContent = el.getAttribute(`data-${lang}`);
+                }
+            });
+            
+            // Update dynamic content
+            document.getElementById('selectedRoom').value = roomData[selectedRoom].name[lang];
+            generateTimetable();
+            generateMenuPreorder();
+            updateSelectedSlots();
+        }
+    </script>
+</body>
+</html>
