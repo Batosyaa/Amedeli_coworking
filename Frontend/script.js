@@ -1,8 +1,17 @@
+const EMAILJS_CONFIG = {
+    publicKey: "ZGILo2gjELlAeN6yE",
+    serviceID: "service_8gppcmh",
+    templateID: "template_2506gz7"
+}
+
+emailjs.init(EMAILJS_CONFIG.publicKey);
+
 AOS.init({
     duration: 800,
     once: true,
     offset: 100
 });
+
 let currentLang = 'ru';
 function switchLang(lang) {
     currentLang = lang;
@@ -13,6 +22,7 @@ function switchLang(lang) {
         el.textContent = el.getAttribute(`data-${lang}`);
     });
 }
+
 function toggleMobileMenu() {
     document.getElementById('navLinks').classList.toggle('active');
 }
@@ -26,6 +36,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
 let selectedRoom = 'conference';
 let selectedSlots = [];
 const roomData = {
@@ -42,6 +53,7 @@ const roomData = {
         price: '3,000₸'
     }
 };
+
 function selectRoom(room) {
     selectedRoom = room;
     document.querySelectorAll('.room-btn').forEach(btn => btn.classList.remove('active'));
@@ -49,6 +61,7 @@ function selectRoom(room) {
     document.getElementById('selectedRoom').value = roomData[room].name[currentLang];
     generateTimetable();
 }
+
 function generateTimetable() {
     const days = {
         ru: ['Время', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
@@ -77,11 +90,6 @@ function generateTimetable() {
             slot.dataset.day = day;
             slot.dataset.hour = hour;
             slot.dataset.room = selectedRoom;
-            
-            if (Math.random() > 0.7) {
-                slot.classList.remove('available');
-                slot.classList.add('booked');
-            }
             
             slot.addEventListener('click', function() {
                 if (!this.classList.contains('booked')) {
@@ -127,8 +135,10 @@ function generateMenuPreorder() {
         { name: { ru: 'Мохито', kz: 'Мохито', en: 'Mojito' }, price: '1190₸' },
         { name: { ru: 'Цитрусовый лимонад', kz: 'Цитрустық лимонад', en: 'Citrus Lemonade' }, price: '1190₸' }
     ];
+
     const container = document.getElementById('menuPreorder');
     container.innerHTML = '';
+    
     menuItems.forEach((item, index) => {
         const div = document.createElement('div');
         div.className = 'checkbox-item';
@@ -139,8 +149,10 @@ function generateMenuPreorder() {
         container.appendChild(div);
     });
 }
+
 document.getElementById('bookingForm').addEventListener('submit', function(e) {
     e.preventDefault();
+
     const formData = {
         name: document.getElementById('clientName').value,
         phone: document.getElementById('clientPhone').value,
@@ -152,38 +164,90 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
         menu: Array.from(document.querySelectorAll('input[name="menu_preorder"]:checked'))
             .map(cb => cb.value).join(', ')
     };
-    // Validate
+
     if (!formData.name || !formData.phone) {
         alert(currentLang === 'ru' ? 'Пожалуйста, заполните все обязательные поля' : 
               currentLang === 'kz' ? 'Барлық міндетті өрістерді толтырыңыз' : 
               'Please fill in all required fields');
         return;
     }
+
     if (selectedSlots.length === 0) {
         alert(currentLang === 'ru' ? 'Пожалуйста, выберите время' : 
               currentLang === 'kz' ? 'Уақытты таңдаңыз' : 
               'Please select time slots');
         return;
     }
-    console.log('Booking Data:', formData);
-    document.getElementById('successMessage').classList.add('show');
-    
-    setTimeout(() => {
-        this.reset();
-        document.getElementById('successMessage').classList.remove('show');
+
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = currentLang === 'ru' ? 'Отправка...' : 
+                                   currentLang === 'kz' ? 'Жіберілуде...' : 
+                                   'Sending...';
+
+    const emailParams = {
+        client_name: formData.name,
+        client_phone: formData.phone,
+        client_email: formData.email || "Не указано.",
+        guest_count: formData.guestCount,
+        room_name: formData.room,
+        selected_time: formData.time,
+        additional_notes: formData.notes || "Нет дополнительных пожеланий.",
+        menu_preorder: formData.menu || "Нет предзаказа.",
+        booking_date: new Date().toLocaleString('ru-RU')
+    }
+
+    console.log("Sending email parameters: ", emailParams);
+
+    emailjs.send(
+        EMAILJS_CONFIG.serviceID,
+        EMAILJS_CONFIG.templateID,
+        emailParams
+    )
+    .then(function(response) {
+        console.log("Success.. ", response.status, response.text);
+
+        document.getElementById('successMessage').classList.add('show');
+
+        document.getElementById('bookingForm').reset();
         document.querySelectorAll('.time-slot.selected').forEach(slot => {
             slot.classList.remove('selected');
         });
         selectedSlots = [];
-    }, 3000);
-    // In production, redirect to WhatsApp or send email there: ""
-    // window.open(`https://wa.me/77001234567?text=${encodeURIComponent('Заявка на бронирование...')}`, '_blank');
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+
+        setTimeout(() => {
+            document.getElementById('successMessage').classList.remove('show');
+        }, 5000);
+
+        const whatsappMessage = encodeURIComponent(
+            `Здравствуйте! Я отправил заявку на бронирование ${formData.room} через сайт на имя: ${formData.name}`
+        );
+        setTimeout(() => {
+            window.open(`https://wa.me/77076133843?text=${whatsappMessage}`, '_blank');
+        }, 1000);
+    
+    }, function(error) {
+        console.error('Failed... ', error);
+        alert(currentLang === 'ru' ? 'Ошибка отправки. Попробуйте позже.' : 
+                currentLang === 'kz' ? 'Жіберу қатесі. Кейінірек көріңіз.' : 
+                    'Sending error. Please try again later.');
+        
+        
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+    });
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     generateTimetable();
     generateMenuPreorder();
     document.getElementById('selectedRoom').value = roomData[selectedRoom].name[currentLang];
 });
+
 function switchLang(lang) {
     currentLang = lang;
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));

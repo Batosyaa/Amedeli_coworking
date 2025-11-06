@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AMIDELI HUB</title>
+    <link rel="icon" href="C:\Users\Admin\OneDrive\Рабочий стол\Project_coworking\Amedeli_coworking\photo\logo.jpg">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 </head>
@@ -106,18 +107,6 @@
                 </ul>
             </div>
 
-            <!-- <div class="facility-card" data-aos="fade-up" data-aos-delay="350">
-                <div class="facility-icon">☕</div>
-                <h3 data-ru="Кофейня" data-kz="Кофехана" data-en="Coffee Shop">Кофейня</h3>
-                <p data-ru="Свежий кофе и закуски" data-kz="Жаңа кофе және тағамдар" data-en="Fresh coffee and snacks">Свежий кофе и закуски</p>
-                <div class="facility-price" data-ru="От 690₸" data-kz="690₸-тен" data-en="From 690₸">От 690₸</div>
-                <ul class="facility-features">
-                    <li data-ru="Авторские напитки" data-kz="Авторлық сусындар" data-en="Signature Drinks">Авторские напитки</li>
-                    <li data-ru="Свежая выпечка" data-kz="Жаңа пісірілген тағамдар" data-en="Fresh Pastries">Свежая выпечка</li>
-                    <li data-ru="Лимонады и чаи" data-kz="Лимонадтар және шайлар" data-en="Lemonades & Teas">Лимонады и чаи</li>
-                </ul>
-            </div> -->
-
             <div class="facility-card" data-aos="fade-up" data-aos-delay="350">
                 <div class="facility-icon">💻</div>
                 <h3 data-ru="Коворкинг-зона" data-kz="Коворкинг аймағы" data-en="Coworking Zone">Коворкинг-зона</h3>
@@ -129,84 +118,6 @@
                     <li data-ru="Розетки и зарядки" data-kz="Розеткалар және зарядтау" data-en="Outlets & Charging">Розетки и зарядки</li>
                 </ul>
             </div>
-        </div>
-    </section>
-
-    <section id="booking">
-        <h2 class="section-title" data-ru="Бронирование" data-kz="Брондау" data-en="Booking">Бронирование</h2>
-        <p class="section-subtitle" data-ru="Выберите удобное время и отправьте заявку" data-kz="Ыңғайлы уақытты таңдап, өтінім жіберіңіз" data-en="Choose a convenient time and send a request">
-            Выберите удобное время и отправьте заявку
-        </p>
-
-        <div class="booking-section" data-aos="fade-up">
-            <div class="room-selector">
-                <button class="room-btn active" onclick="selectRoom('conference')" data-ru="Конференц-зал" data-kz="Конференц-зал" data-en="Conference Hall">Конференц-зал</button>
-                <button class="room-btn" onclick="selectRoom('studio')" data-ru="Контент-студия" data-kz="Контент-студия" data-en="Content Studio">Контент-студия</button>
-                <button class="room-btn" onclick="selectRoom('meeting')" data-ru="Переговорная" data-kz="Келіссөз бөлмесі" data-en="Meeting Room">Переговорная</button>
-            </div>
-
-            <div class="timetable-container">
-                <h3 class="text-center mb-2" data-ru="Расписание на неделю" data-kz="Апта кестесі" data-en="Weekly Schedule">Расписание на неделю</h3>
-                <div class="timetable">
-                    <div class="timetable-grid" id="timetableGrid">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                </div>
-            </div>
-
-            <form class="booking-form" id="bookingForm">
-                <div class="success-message" id="successMessage">
-                    <span data-ru="✓ Ваша заявка успешно отправлена! Мы свяжемся с вами в WhatsApp" data-kz="✓ Өтінім сәтті жіберілді! Біз сізбен WhatsApp арқылы хабарласамыз" data-en="✓ Your request has been sent successfully! We will contact you via WhatsApp">
-                        Ваша заявка успешно отправлена! Мы свяжемся с вами в WhatsApp
-                    </span>
-                </div>
-
-                <div class="form-group">
-                    <label data-ru="Ваше имя *" data-kz="Атыңыз *" data-en="Your Name *">Ваше имя *</label>
-                    <input type="text" id="clientName" required>
-                </div>
-
-                <div class="form-group">
-                    <label data-ru="Номер телефона (WhatsApp) *" data-kz="Телефон нөмірі (WhatsApp) *" data-en="Phone Number (WhatsApp) *">Номер телефона (WhatsApp) *</label>
-                    <input type="tel" id="clientPhone" required placeholder="+7 (___) ___-__-__">
-                </div>
-
-                <div class="form-group">
-                    <label data-ru="Email" data-kz="Email" data-en="Email">Email</label>
-                    <input type="email" id="clientEmail">
-                </div>
-
-                <div class="form-group">
-                    <label data-ru="Количество человек" data-kz="Адам саны" data-en="Number of People">Количество человек</label>
-                    <input type="number" id="guestCount" min="1" max="30" value="1">
-                </div>
-
-                <div class="form-group">
-                    <label data-ru="Выбранная комната" data-kz="Таңдалған бөлме" data-en="Selected Room">Выбранная комната</label>
-                    <input type="text" id="selectedRoom" readonly>
-                </div>
-
-                <div class="form-group">
-                    <label data-ru="Выбранное время" data-kz="Таңдалған уақыт" data-en="Selected Time">Выбранное время</label>
-                    <input type="text" id="selectedTime" readonly>
-                </div>
-
-                <div class="form-group full-width">
-                    <label data-ru="Дополнительные пожелания" data-kz="Қосымша тілектер" data-en="Additional Requests">Дополнительные пожелания</label>
-                    <textarea id="additionalNotes" rows="3"></textarea>
-                </div>
-
-                <div class="form-group full-width">
-                    <label data-ru="Предзаказ из меню (опционально)" data-kz="Мәзірден алдын ала тапсырыс (қалауыңызша)" data-en="Pre-order from Menu (Optional)">Предзаказ из меню (опционально)</label>
-                    <div class="menu-preorder" id="menuPreorder">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
-                </div>
-
-                <div class="form-group full-width">
-                    <button type="submit" class="btn btn-primary" style="width: 100%;" data-ru="Отправить заявку" data-kz="Өтінім жіберу" data-en="Send Request">Отправить заявку</button>
-                </div>
-            </form>
         </div>
     </section>
 
@@ -435,6 +346,84 @@
         </div>
     </section>
 
+    <section id="booking">
+    <h2 class="section-title" data-ru="Бронирование" data-kz="Брондау" data-en="Booking">Бронирование</h2>
+    <p class="section-subtitle" data-ru="Выберите удобное время и отправьте заявку" data-kz="Ыңғайлы уақытты таңдап, өтінім жіберіңіз" data-en="Choose a convenient time and send a request">
+        Выберите удобное время и отправьте заявку
+    </p>
+
+    <div class="booking-section" data-aos="fade-up">
+        <div class="room-selector">
+            <button class="room-btn active" onclick="selectRoom('conference')" data-ru="Конференц-зал" data-kz="Конференц-зал" data-en="Conference Hall">Конференц-зал</button>
+            <button class="room-btn" onclick="selectRoom('studio')" data-ru="Контент-студия" data-kz="Контент-студия" data-en="Content Studio">Контент-студия</button>
+            <button class="room-btn" onclick="selectRoom('meeting')" data-ru="Переговорная" data-kz="Келіссөз бөлмесі" data-en="Meeting Room">Переговорная</button>
+            </div>
+
+        <div class="timetable-container">
+            <h3 class="text-center mb-2" data-ru="Расписание на неделю" data-kz="Апта кестесі" data-en="Weekly Schedule">Расписание на неделю</h3>
+            <div class="timetable">
+                <div class="timetable-grid" id="timetableGrid">
+                     Main logic is written in the JS script
+                </div>
+            </div>
+        </div>
+
+        <form class="booking-form" id="bookingForm">
+            <div class="success-message" id="successMessage">
+                <span data-ru="✓ Ваша заявка успешно отправлена! Мы свяжемся с вами в WhatsApp" data-kz="✓ Өтінім сәтті жіберілді! Біз сізбен WhatsApp арқылы хабарласамыз" data-en="✓ Your request has been sent successfully! We will contact you via WhatsApp">
+                    Ваша заявка успешно отправлена! Мы свяжемся с вами в WhatsApp
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label data-ru="Ваше имя *" data-kz="Атыңыз *" data-en="Your Name *">Ваше имя *</label>
+                <input type="text" id="clientName" required>
+            </div>
+
+            <div class="form-group">
+                <label data-ru="Номер телефона (WhatsApp) *" data-kz="Телефон нөмірі (WhatsApp) *" data-en="Phone Number (WhatsApp) *">Номер телефона (WhatsApp) *</label>
+                <input type="tel" id="clientPhone" required placeholder="+7 (___) ___-__-__">
+            </div>
+
+            <div class="form-group">
+                <label data-ru="Email" data-kz="Email" data-en="Email">Email</label>
+                <input type="email" id="clientEmail">
+            </div>
+
+            <div class="form-group">
+                <label data-ru="Количество человек" data-kz="Адам саны" data-en="Number of People">Количество человек</label>
+                <input type="number" id="guestCount" min="1" max="30" value="1">
+            </div>
+
+            <div class="form-group">
+                <label data-ru="Выбранная комната" data-kz="Таңдалған бөлме" data-en="Selected Room">Выбранная комната</label>
+                <input type="text" id="selectedRoom" readonly>
+            </div>
+
+            <div class="form-group">
+                <label data-ru="Выбранное время" data-kz="Таңдалған уақыт" data-en="Selected Time">Выбранное время</label>
+                <input type="text" id="selectedTime" readonly>
+            </div>
+
+            <div class="form-group full-width">
+                <label data-ru="Дополнительные пожелания" data-kz="Қосымша тілектер" data-en="Additional Requests">Дополнительные пожелания</label>
+                <textarea id="additionalNotes" rows="3"></textarea>
+            </div>
+
+            <div class="form-group full-width">
+                <label data-ru="Предзаказ из меню (опционально)" data-kz="Мәзірден алдын ала тапсырыс (қалауыңызша)" data-en="Pre-order from Menu (Optional)">Предзаказ из меню (опционально)</label>
+                <div class="menu-preorder" id="menuPreorder">
+                     Will be populated by JavaScript
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <button type="submit" class="btn btn-primary" style="width: 100%;" data-ru="Отправить заявку" data-kz="Өтінім жіберу" data-en="Send Request">Отправить заявку</button>
+            </div>
+        </form>
+    </div>
+    </section>
+
     <section id="contact">
         <h2 class="section-title" data-ru="Контакты" data-kz="Байланыс" data-en="Contact">Контакты</h2>
         <div class="footer-content">
@@ -448,8 +437,8 @@
             </div>
             <div class="footer-section" data-aos="fade-up" data-aos-delay="200">
                 <h4 data-ru="Телефон" data-kz="Телефон" data-en="Phone">Телефон</h4>
-                <a href="tel:+77001234567">+7 (700) 123-45-67</a>
-                <a href="https://wa.me/77001234567" target="_blank">WhatsApp</a>
+                <a href="tel:+77074197972">+7 (707) 419-79-72</a>
+                <a href="https://wa.me/77074197972" target="_blank">WhatsApp</a>
             </div>
             <div class="footer-section" data-aos="fade-up" data-aos-delay="300">
                 <h4 data-ru="Социальные сети" data-kz="Әлеуметтік желілер" data-en="Social Media">Социальные сети</h4>
@@ -469,6 +458,7 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
