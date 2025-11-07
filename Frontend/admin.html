@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - AMIDELI HUB</title>
+    <link rel="stylesheet" href="admin_style.css">
+</head>
+<body>
+    <div class="login-container" id="loginPage">
+        <div class="login-box">
+            <div class="login-logo">☘ AMIDELI HUB</div>
+            <h2 style="text-align: center; margin-bottom: 2rem;">Admin Panel</h2>
+            
+            <div class="error-message" id="loginError">
+                Неверный пароль
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" id="passwordInput" placeholder="Введите пароль" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="dashboard" id="dashboard">
+        <div class="header">
+            <div class="header-title">☘ AMIDELI HUB - Admin Panel</div>
+            <div class="header-info">
+                <div class="auto-refresh-status">
+                    <span id="refreshIcon">🔄</span>
+                    <span>Авто-обновление: 30 сек</span>
+                </div>
+                <div class="admin-name">👤 Admin</div>
+                <button class="logout-btn" onclick="logout()">Выйти</button>
+            </div>
+        </div>
+
+        <div class="refresh-indicator" id="refreshIndicator">
+            ✓ Обновлено
+        </div>
+
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-value" id="statPending">0</div>
+                    <div class="stat-label">Ожидают оплаты</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value" id="statConfirmed">0</div>
+                    <div class="stat-label">Подтверждено сегодня</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-value" id="statRevenue">0₸</div>
+                    <div class="stat-label">Доход за неделю</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-value" id="statTotal">0</div>
+                    <div class="stat-label">Всего бронирований</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        ⏳ Ожидают подтверждения оплаты
+                        <span class="badge" id="pendingCount">0</span>
+                    </h2>
+                    <button class="btn btn-info btn-small" onclick="loadBookings()">🔄 Обновить</button>
+                </div>
+                <div id="pendingBookings">
+                    <div class="loading">Загрузка...</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        ✅ Подтвержденные бронирования
+                    </h2>
+                    <div class="filters">
+                        <select class="filter-select" id="filterRoom" onchange="filterBookings()">
+                            <option value="">Все комнаты</option>
+                            <option value="conference">Конференц-зал</option>
+                            <option value="studio">Контент-студия</option>
+                            <option value="meeting">Переговорная</option>
+                        </select>
+                        <select class="filter-select" id="filterDate" onchange="filterBookings()">
+                            <option value="">Все даты</option>
+                            <option value="today">Сегодня</option>
+                            <option value="tomorrow">Завтра</option>
+                            <option value="week">Эта неделя</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="confirmedBookings">
+                    <div class="loading">Загрузка...</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">❌ Отмененные бронирования</h2>
+                </div>
+                <div id="cancelledBookings">
+                    <div class="loading">Загрузка...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
+    <script src="../Backend/admin_script.js"></script>
+</body>
+</html>

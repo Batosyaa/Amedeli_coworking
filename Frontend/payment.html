@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата - AMIDELI HUB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="payment_style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">☘ AMIDELI HUB</div>
+        
+        <div class="booking-number" id="bookingNumber">Загрузка...</div>
+
+        <div class="booking-info" id="bookingInfo">
+            <!-- Booking details will be inserted here -->
+        </div>
+
+        <div class="qr-section">
+            <h2>💳 Оплата через Kaspi</h2>
+            <div class="kaspi-number">+7 700 839 2517</div>
+            <div class="qr-code" id="qrCode">
+                <!-- QR code will be generated here -->
+                <div style="font-size: 4rem;">📱</div>
+                <p style="margin-top: 1rem;">Отсканируйте QR код<br>в приложении Kaspi</p>
+            </div>
+            <div class="timer" id="timer">⏱️ Осталось: 15:00</div>
+        </div>
+
+        <div class="instructions">
+            <h3>📱 Как оплатить:</h3>
+            <ol>
+                <li>Откройте приложение <strong>Kaspi.kz</strong></li>
+                <li>Перейдите в раздел <strong>"Платежи"</strong></li>
+                <li>Выберите <strong>"По номеру телефона"</strong></li>
+                <li>Введите номер: <strong>+7 700 839 2517</strong></li>
+                <li>Укажите сумму: <strong id="amountText">0₸</strong></li>
+                <li>В комментарии укажите: <strong id="commentText">AMH-00000000-000</strong></li>
+                <li>Подтвердите платеж</li>
+            </ol>
+        </div>
+
+        <button class="btn btn-primary" onclick="confirmPayment()">✅ Я оплатил</button>
+        <button class="btn btn-secondary" onclick="cancelBooking()">❌ Отменить бронирование</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="../Backend/payment_script.js"></script>
+</body>
+</html>

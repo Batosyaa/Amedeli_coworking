@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #FFDFC0;
+    --primary: #EAC9A8;
+    --text: #3C3C3C;
+    --accent: #D38F61;
+    --border: #C2B8AF;
+    --white: #FFFFFF;
+    --success: #4CAF50;
+    --error: #f44336;
+    --radius: 20px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 3rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--accent);
+}
+
+.booking-info {
+    background: var(--bg-color);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--accent);
+}
+
+.info-label {
+    color: var(--text);
+    opacity: 0.8;
+}
+
+.info-value {
+    font-weight: 600;
+}
+
+.qr-section {
+    text-align: center;
+    padding: 2rem;
+    background: var(--primary);
+    border-radius: 15px;
+    margin: 2rem 0;
+}
+
+.qr-code {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 1rem 0;
+}
+
+.kaspi-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 1rem 0;
+}
+
+.timer {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--error);
+    margin: 1rem 0;
+}
+
+.instructions {
+    background: #E3F2FD;
+    border-left: 4px solid #2196F3;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+}
+
+.instructions h3 {
+    color: #1976D2;
+    margin-bottom: 1rem;
+}
+
+.instructions ol {
+    margin-left: 1.5rem;
+}
+
+.instructions li {
+    margin: 0.5rem 0;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.btn-primary {
+    background: var(--success);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--border);
+    color: var(--text);
+}
+
+.btn-secondary:hover {
+    background: var(--text);
+    color: white;
+}
+
+.booking-number {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 2rem 1.5rem;
+    }
+
+    .info-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

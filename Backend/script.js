@@ -1,3 +1,18 @@
+const SUPABASE_URL = 'https://ppjbczfdcrsmikpbxfcm.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBwamJjemZkY3JzbWlrcGJ4ZmNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0NTU5MTEsImV4cCI6MjA3ODAzMTkxMX0.0Rl6Nu2Ha9Ht1qdn38FTolB9SyhBwMpMuelVupHM2Zg';
+
+let supabaseClient;
+
+window.addEventListener('DOMContentLoaded', function() {
+    if (typeof supabase !== 'undefined') {
+        const { createClient } = supabase;
+        supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+        console.log('Supabase client initialized.');
+    } else {
+        console.error('Supabase library is not loaded.');
+    }
+})
+
 const EMAILJS_CONFIG = {
     publicKey: "ZGILo2gjELlAeN6yE",
     serviceID: "service_8gppcmh",
@@ -74,9 +89,15 @@ async function generateTimetable() {
     const hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
     
     const grid = document.getElementById('timetableGrid');
-    grid.innerHTML = '';
+    grid.innerHTML = '<div class="Loading">Загрузка расписания...</div>';
 
     try {
+        if (!supabaseClient) {
+            console.warn('Waiting for Supabase client to initialize...');
+            setTimeout(generateTimetable, 500);
+            return;
+        }
+
         const today = new Date();
         const dayOfWeek = today.getDay();
         const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
@@ -86,7 +107,7 @@ async function generateTimetable() {
         const endOfWeek = new Date(monday);
         endOfWeek.setDate(monday.getDate() + 7);
 
-        const { data: bookings, error } = await supabase
+        const { data: bookings, error } = await supabaseClient
             .from('bookings')
             .select('booking_date, time_slots, room_type, booking_status')
             .eq('room_type', selectedRoom)
@@ -127,14 +148,14 @@ async function generateTimetable() {
     });
 
     hours.forEach(hour => {
-        const timeLabel = document.createelement('div');
-        timeLabel.className = 'time-label';
+        const timeLabel = document.createElement('div');
+        timeLabel.className = 'time-header';
         timeLabel.textContent = hour;
         grid.appendChild(timeLabel);
     
         for (let day = 1; day <= 7; day++) {
             const slot = document.createElement('div');
-            slot.classname = 'time-slot';
+            slot.className = 'time-slot';
             slot.dataset.day = day;
             slot.dataset.hour = hour;
             slot.dataset.room = selectedRoom;
@@ -215,7 +236,7 @@ function generateMenuPreorder() {
 
 async function calculateBookingCost(roomType, timeSlots, menuItems) {
     try {
-        const { data: room, error } = await supabase
+        const { data: room, error } = await supabaseClient
         .from('rooms')
         .select('price_per_hour, price_after_7pm')
         .eq('room_type', roomType)
@@ -235,7 +256,7 @@ async function calculateBookingCost(roomType, timeSlots, menuItems) {
 
         let menuCost = 0;
         if (menuItems && menuItems.length > 0) {
-            const {data: menuData} = await supabase
+            const {data: menuData} = await supabaseClient
                 .from('menu_items')
                 .select('name_ru, price')
                 .in('name_ru', menuItems);
@@ -277,7 +298,7 @@ document.getElementById('bookingForm').addEventListener('submit', async function
         time: document.getElementById('selectedTime').value,
         notes: document.getElementById('additionalNotes').value,
         menu: Array.from(document.querySelectorAll('input[name="menu_preorder"]:checked'))
-            .map(cb => cb.value).join(', ')
+            .map(cb => cb.value)
     };
 
     if (!formData.name || !formData.phone) {
@@ -316,7 +337,7 @@ document.getElementById('bookingForm').addEventListener('submit', async function
 
         const firstSlot = selectedSlots[0];
         const bookingDate = new Date(monday);
-        bookingDate.setDate(monday.getDate() + (parseInt(fisrtSlot.day) - 1));
+        bookingDate.setDate(monday.getDate() + (parseInt(firstSlot.day) - 1));
 
         const times = selectedSlots.map(s => s.hour).sort();
         const startTime = times[0];
@@ -327,7 +348,7 @@ document.getElementById('bookingForm').addEventListener('submit', async function
         const paymentExpiry = new Date();
         paymentExpiry.setMinutes(paymentExpiry.getMinutes() + 15);
 
-        const { data, error } = await supabase
+        const { data: booking, error: bookingError } = await supabaseClient
             .from('bookings')
             .insert([{
                 room_type: selectedRoom,
@@ -335,7 +356,7 @@ document.getElementById('bookingForm').addEventListener('submit', async function
                 client_name: formData.name,
                 client_phone: formData.phone,
                 client_email: formData.email || null,
-                gues_count: parseInt(formData.guestCount),
+                guest_count: parseInt(formData.guestCount),
                 booking_date: bookingDate.toISOString().split('T')[0],
                 start_time: startTime,
                 end_time: endTime,
@@ -392,7 +413,7 @@ document.getElementById('bookingForm').addEventListener('submit', async function
 
         sessionStorage.setItem('pendingBooking', JSON.stringify({
             bookingNumber: booking.booking_number,
-            bookingId: bookingId,
+            bookingId: booking.id,
             depositAmount: pricing.depositAmount,
             totalCost: pricing.totalCost,
             remainingAmount: pricing.remainingAmount,
