@@ -78,12 +78,10 @@ phoneInput.addEventListener('input', function(e) {
     phoneInput.value = formatted;
 });
 
-// FIXED: Only prevent deleting the +7 prefix, allow typing
 phoneInput.addEventListener('keydown', function(e) {
     const cursorPos = phoneInput.selectionStart;
     const cursorEnd = phoneInput.selectionEnd;
     
-    // Only prevent backspace/delete when trying to delete the "+7 " prefix
     if (e.key === 'Backspace' && cursorPos <= 3 && cursorEnd <= 3) {
         e.preventDefault();
     }
