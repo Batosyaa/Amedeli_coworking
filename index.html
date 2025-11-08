@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
     <title>AMIDELI HUB</title>
     <link rel="icon" href="logo.jpg">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
@@ -363,7 +364,7 @@
             <h3 class="text-center mb-2" data-ru="Расписание на неделю" data-kz="Апта кестесі" data-en="Weekly Schedule">Расписание на неделю</h3>
             <div class="timetable">
                 <div class="timetable-grid" id="timetableGrid">
-                     Main logic is written in the JS script
+                     <!-- Main logic is written in the JS script -->
                 </div>
             </div>
         </div>
@@ -382,7 +383,13 @@
 
             <div class="form-group">
                 <label data-ru="Номер телефона (WhatsApp) *" data-kz="Телефон нөмірі (WhatsApp) *" data-en="Phone Number (WhatsApp) *">Номер телефона (WhatsApp) *</label>
-                <input type="tel" id="clientPhone" required placeholder="+7 (___) ___-__-__">
+                <input 
+                    type="tel" 
+                    id="clientPhone" 
+                    required 
+                    placeholder="+7 (___) ___-__-__" 
+                    maxlength="18"
+                >
             </div>
 
             <div class="form-group">
@@ -413,7 +420,7 @@
             <div class="form-group full-width">
                 <label data-ru="Предзаказ из меню (опционально)" data-kz="Мәзірден алдын ала тапсырыс (қалауыңызша)" data-en="Pre-order from Menu (Optional)">Предзаказ из меню (опционально)</label>
                 <div class="menu-preorder" id="menuPreorder">
-                     Will be populated by JavaScript
+                     <!-- Will be populated by JavaScript -->
                 </div>
             </div>
 
@@ -444,7 +451,9 @@
                 <h4 data-ru="Социальные сети" data-kz="Әлеуметтік желілер" data-en="Social Media">Социальные сети</h4>
                 <div class="social-links">
                     <a href="#" target="_blank">📱</a>
-                    <a href="#" target="_blank">📷</a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="instagram.png" alt="Instagram" class="social-icon" width="28" height="28">
+                    </a>
                     <a href="#" target="_blank">▶️</a>
                 </div>
             </div>

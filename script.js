@@ -54,6 +54,84 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+const phoneInput = document.getElementById('clientPhone');
+
+phoneInput.addEventListener('focus', function() {
+    if (phoneInput.value === '') {
+        phoneInput.value = '+7 ';
+    }
+});
+
+phoneInput.addEventListener('input', function(e) {
+    let val = phoneInput.value.replace(/\D/g, '');
+
+    if (val.startsWith('7')) val = val.slice(1);
+    if (val.startsWith('8')) val = val.slice(1);
+    if (val.length > 10) val = val.slice(0, 10);
+
+    let formatted = '+7';
+    if (val.length > 0) formatted += ' (' + val.slice(0, 3);
+    if (val.length >= 3) formatted += ') ' + val.slice(3, 6);
+    if (val.length >= 6) formatted += '-' + val.slice(6, 8);
+    if (val.length >= 8) formatted += '-' + val.slice(8, 10);
+
+    phoneInput.value = formatted;
+});
+
+// FIXED: Only prevent deleting the +7 prefix, allow typing
+phoneInput.addEventListener('keydown', function(e) {
+    const cursorPos = phoneInput.selectionStart;
+    const cursorEnd = phoneInput.selectionEnd;
+    
+    // Only prevent backspace/delete when trying to delete the "+7 " prefix
+    if (e.key === 'Backspace' && cursorPos <= 3 && cursorEnd <= 3) {
+        e.preventDefault();
+    }
+    if (e.key === 'Delete' && cursorPos < 3) {
+        e.preventDefault();
+    }
+    if (e.key === 'ArrowLeft' && cursorPos <= 3) {
+        e.preventDefault();
+    }
+});
+
+phoneInput.addEventListener('blur', function() {
+    const digitsOnly = phoneInput.value.replace(/\D/g, '');
+
+    if (digitsOnly.length > 0 && digitsOnly.length < 11) {
+        alert(currentLang === 'ru' ? 'Пожалуйста, введите полный номер телефона (10 цифр).' :
+              currentLang === 'kz' ? 'Толық телефон нөмірін енгізіңіз (10 сан).' :
+              'Please enter a complete phone number (10 digits).');
+        phoneInput.value = '';
+    }
+    
+    if (phoneInput.value === '+7 ' || phoneInput.value === '+7') {
+        phoneInput.value = '';
+    }
+});
+
+phoneInput.addEventListener('paste', function(e) {
+    e.preventDefault();
+
+    const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+    const digits = pastedText.replace(/\D/g, '');
+
+    let cleanDigits = digits;
+    if (cleanDigits.startsWith('7')) cleanDigits = cleanDigits.slice(1);
+    if (cleanDigits.startsWith('8')) cleanDigits = cleanDigits.slice(1);
+    cleanDigits = cleanDigits.slice(0, 10);
+
+    if (cleanDigits.length > 0) {
+        let formatted = '+7';
+        if (cleanDigits.length > 0) formatted += ' (' + cleanDigits.slice(0, 3);
+        if (cleanDigits.length >= 3) formatted += ') ' + cleanDigits.slice(3, 6);
+        if (cleanDigits.length >= 6) formatted += '-' + cleanDigits.slice(6, 8);
+        if (cleanDigits.length >= 8) formatted += '-' + cleanDigits.slice(8, 10);
+        
+        phoneInput.value = formatted;
+    }
+});
+
 let selectedRoom = 'conference';
 let selectedSlots = [];
 const roomData = {
