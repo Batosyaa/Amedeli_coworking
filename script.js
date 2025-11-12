@@ -135,15 +135,47 @@ let selectedSlots = [];
 const roomData = {
     conference: { 
         name: { ru: 'Конференц-зал', kz: 'Конференц-зал', en: 'Conference Hall' },
-        price: '10,000₸'
+        price: '10,000₸/час'
     },
     studio: { 
         name: { ru: 'Контент-студия', kz: 'Контент-студия', en: 'Content Studio' },
-        price: '8,000₸ - 10,000₸'
+        price: '8,000₸ - 10,000₸/час'
     },
-    meeting: { 
-        name: { ru: 'Переговорная', kz: 'Келіссөз бөлмесі', en: 'Meeting Room' },
-        price: '3,000₸'
+    'meeting-a': { 
+        name: { ru: 'Переговорная A', kz: 'Келіссөз бөлмесі A', en: 'Meeting Room A' },
+        price: '3,000₸/час'
+    },
+    'meeting-b': { 
+        name: { ru: 'Переговорная B', kz: 'Келіссөз бөлмесі B', en: 'Meeting Room B' },
+        price: '3,000₸/час'
+    },
+    'meeting-c': { 
+        name: { ru: 'Переговорная C', kz: 'Келіссөз бөлмесі C', en: 'Meeting Room C' },
+        price: '3,000₸/час'
+    },
+    'meeting-d': { 
+        name: { ru: 'Переговорная D', kz: 'Келіссөз бөлмесі D', en: 'Meeting Room D' },
+        price: '3,000₸/час'
+    },
+    'workspace-1': { 
+        name: { ru: 'Рабочее место 1', kz: 'Жұмыс орны 1', en: 'Workspace 1' },
+        price: '1,000₸/час или 5,000₸/день'
+    },
+    'workspace-2': { 
+        name: { ru: 'Рабочее место 2', kz: 'Жұмыс орны 2', en: 'Workspace 2' },
+        price: '1,000₸/час или 5,000₸/день'
+    },
+    'workspace-3': { 
+        name: { ru: 'Рабочее место 3', kz: 'Жұмыс орны 3', en: 'Workspace 3' },
+        price: '1,000₸/час или 5,000₸/день'
+    },
+    'workspace-4': { 
+        name: { ru: 'Рабочее место 4', kz: 'Жұмыс орны 4', en: 'Workspace 4' },
+        price: '1,000₸/час или 5,000₸/день'
+    },
+    'workspace-5': { 
+        name: { ru: 'Рабочее место 5', kz: 'Жұмыс орны 5', en: 'Workspace 5' },
+        price: '1,000₸/час или 5,000₸/день'
     }
 };
 
