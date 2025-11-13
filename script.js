@@ -189,15 +189,15 @@ function selectRoom(room) {
 
 async function generateTimetable() {
     const days = {
-        ru: ['Время', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
-        kz: ['Уақыт', 'Дс', 'Сс', 'Ср', 'Бс', 'Жм', 'Сб', 'Жс'],
-        en: ['Time', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        ru: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+        kz: ['Дс', 'Сс', 'Ср', 'Бс', 'Жм', 'Сб', 'Жс'],
+        en: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     };
     
-    const hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+    const hours = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
     
     const grid = document.getElementById('timetableGrid');
-    grid.innerHTML = '<div class="Loading">Загрузка расписания...</div>';
+    grid.innerHTML = '<div class="loading">Загрузка расписания...</div>';
 
     try {
         if (!supabaseClient) {
@@ -207,20 +207,17 @@ async function generateTimetable() {
         }
 
         const today = new Date();
-        const dayOfWeek = today.getDay();
-        const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
-        const monday = new Date(today);
-        monday.setDate(today.getDate() + mondayOffset);
+        today.setHours(0, 0, 0, 0);
 
-        const endOfWeek = new Date(monday);
-        endOfWeek.setDate(monday.getDate() + 7);
+        const endDate = new Date(today);
+        endDate.setDate(today.getDate() + 60);
 
         const { data: bookings, error } = await supabaseClient
             .from('bookings')
             .select('booking_date, time_slots, room_type, booking_status')
             .eq('room_type', selectedRoom)
-            .gte('booking_date', monday.toISOString().split('T')[0])
-            .lte('booking_date', endOfWeek.toISOString().split('T')[0])
+            .gte('booking_date', today.toISOString().split('T')[0])
+            .lte('booking_date', endDate.toISOString().split('T')[0])
             .in('booking_status', ['confirmed', 'pending']);
         
         if (error) {
@@ -229,63 +226,102 @@ async function generateTimetable() {
             return;
         }
 
-    const bookedSlots = new Map();
-    if (bookings) {
-        bookings.forEach(booking => {
-            const bookingDate = new Date(booking.booking_date);
-            const dayIndex = (bookingDate.getDay() === 0 ? 7 : bookingDate.getDay());
+        const bookedSlots = new Map();
+        if (bookings) {
+            bookings.forEach(booking => {
+                const bookingDate = booking.booking_date;
+                
+                if (booking.time_slots && Array.isArray(booking.time_slots)) {
+                    booking.time_slots.forEach(slot => {
+                        const key = `${bookingDate}-${slot.hour}`;
+                        bookedSlots.set(key, true);
+                    });
+                }
+            });
+        }
 
-            if (booking.time_slots && Array.isArray(booking.time_slots)) {
-                booking.time_slots.forEach(slot => {
-                    const key = `${dayIndex} - ${slot.hour}`;
-                    bookedSlots.set(key, true);
-                });
+        console.log(`Loaded ${bookings?.length || 0} bookings for ${selectedRoom}`);
+        
+        grid.innerHTML = '';
+        
+        const daysArray = [];
+        for (let i = 0; i < 60; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() + i);
+            daysArray.push(date);
+        }
+
+        grid.style.gridTemplateColumns = `100px repeat(${daysArray.length}, 120px)`;
+
+        const timeHeaderCell = document.createElement('div');
+        timeHeaderCell.className = 'time-header';
+        timeHeaderCell.textContent = currentLang === 'ru' ? 'Время' : currentLang === 'kz' ? 'Уақыт' : 'Time';
+        grid.appendChild(timeHeaderCell);
+
+        daysArray.forEach((date, index) => {
+            const dayIndex = date.getDay();
+            const dayName = days[currentLang][dayIndex === 0 ? 6 : dayIndex - 1];
+            const dateStr = `${date.getDate()}.${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+            
+            const cell = document.createElement('div');
+            cell.className = 'day-header';
+            
+            if (date.toDateString() === today.toDateString()) {
+                cell.style.background = '#D38F61';
+                cell.style.color = 'white';
+                cell.style.fontWeight = '700';
             }
+            
+            if (dayIndex === 0 || dayIndex === 6) {
+                cell.style.background = '#FFE5CC';
+            }
+            
+            cell.innerHTML = `${dayName}<br><small style="font-size: 0.85em; opacity: 0.8;">${dateStr}</small>`;
+            grid.appendChild(cell);
         });
-    }
 
-    console.log(`Loaded ${bookings?.length || 0} bookings for ${selectedRoom}`);
+        hours.forEach(hour => {
+            const timeLabel = document.createElement('div');
+            timeLabel.className = 'time-header';
+            timeLabel.textContent = hour;
+            grid.appendChild(timeLabel);
 
-    grid.innerHTML = '';
-
-    days[currentLang].forEach((day, index) => {
-        const cell = document.createElement('div');
-        cell.className = index === 0 ? 'time-header' : 'day-header';
-        cell.textContent = day;
-        grid.appendChild(cell);
-    });
-
-    hours.forEach(hour => {
-        const timeLabel = document.createElement('div');
-        timeLabel.className = 'time-header';
-        timeLabel.textContent = hour;
-        grid.appendChild(timeLabel);
-    
-        for (let day = 1; day <= 7; day++) {
-            const slot = document.createElement('div');
-            slot.className = 'time-slot';
-            slot.dataset.day = day;
-            slot.dataset.hour = hour;
-            slot.dataset.room = selectedRoom;
-
-            const slotKey = `${day} - ${hour}`;
-            const isBooked = bookedSlots.has(slotKey);
-
-            if (isBooked) {
-                slot.classList.add('booked');
-            } else {
-                slot.classList.add('available');
-                slot.addEventListener('click', function() {
-                    if (!this.classList.contains('booked')) {
-                        this.classList.toggle('selected');
-                        updateSelectedSlots();
-                    }
-                });
-            }
-
-            grid.appendChild(slot);
-        } 
-    });
+            daysArray.forEach(date => {
+                const dateStr = date.toISOString().split('T')[0];
+                const slotKey = `${dateStr}-${hour}`;
+                const isBooked = bookedSlots.has(slotKey);
+                
+                const slot = document.createElement('div');
+                slot.className = 'time-slot';
+                slot.dataset.date = dateStr;
+                slot.dataset.hour = hour;
+                slot.dataset.room = selectedRoom;
+                
+                const slotDateTime = new Date(date);
+                const [slotHour] = hour.split(':');
+                slotDateTime.setHours(parseInt(slotHour), 0, 0, 0);
+                const now = new Date();
+                
+                if (slotDateTime < now) {
+                    slot.classList.add('past');
+                    slot.style.background = '#E0E0E0';
+                    slot.style.cursor = 'not-allowed';
+                    slot.style.opacity = '0.5';
+                } else if (isBooked) {
+                    slot.classList.add('booked');
+                } else {
+                    slot.classList.add('available');
+                    slot.addEventListener('click', function() {
+                        if (!this.classList.contains('booked')) {
+                            this.classList.toggle('selected');
+                            updateSelectedSlots();
+                        }
+                    });
+                }
+                
+                grid.appendChild(slot);
+            });
+        });
 
     } catch (err) {
         console.error('Error generating timetable: ', err);
@@ -297,20 +333,23 @@ function updateSelectedSlots() {
     selectedSlots = [];
     document.querySelectorAll('.time-slot.selected').forEach(slot => {
         selectedSlots.push({
-            day: slot.dataset.day,
+            day: slot.dataset.date,
             hour: slot.dataset.hour,
             room: slot.dataset.room
         });
     });
     
-    const days = {
-        ru: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
-        kz: ['Дүйсенбі', 'Сейсенбі', 'Сәрсенбі', 'Бейсенбі', 'Жұма', 'Сенбі', 'Жексенбі'],
-        en: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    };
+    // const days = {
+    //     ru: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
+    //     kz: ['Дүйсенбі', 'Сейсенбі', 'Сәрсенбі', 'Бейсенбі', 'Жұма', 'Сенбі', 'Жексенбі'],
+    //     en: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    // };
     
-    const timeText = selectedSlots.map(slot => 
-        `${days[currentLang][slot.day - 1]}, ${slot.hour}`
+    const timeText = selectedSlots.map(slot => {
+        const date = new Date(slot.date);
+        const dateStr = `${date.getDate()}.${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+        return `${dateStr} ${slot.hour}`
+    }
     ).join('; ');
     
     document.getElementById('selectedTime').value = timeText || (currentLang === 'ru' ? 'Не выбрано' : currentLang === 'kz' ? 'Таңдалмаған' : 'Not selected');

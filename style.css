@@ -350,34 +350,88 @@ section {
 .timetable {
     overflow-x: auto;
     margin-top: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    position: relative;
 }
 
 .timetable-grid {
     display: grid;
-    grid-template-columns: 100px repeat(7, 1fr);
     gap: 1px;
     background: var(--border);
     border-radius: var(--radius);
     overflow: hidden;
-    min-width: 900px;
+    min-width: fit-content;
+    padding: 1px;
+}
+
+.timetable::after {
+    content: '← Прокрутите для просмотра всех дат →';
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-color);
+    display: block;
+    text-align: center;
+    padding: 1rem;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 10;
+}
+
+.timetable::-webkit-scrollbar {
+    height: 10px;
+}
+
+.timetable::-webkit-scrollbar-track {
+    background: var(--bg-color);
+    border-radius: 10px;
+}
+
+.timetable::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+}
+
+.timetable::-webkit-scrollbar-thumb:hover {
+    background: #c17d50;
 }
 
 .time-header, .day-header, .time-slot {
     background: var(--white);
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     text-align: center;
     font-weight: 600;
+    min-width: 100px;
+}
+
+.time-header {
+    position: sticky;
+    left: 0;
+    z-index: 20;
+    background: var(--primary);
+    font-weight: 700;
 }
 
 .day-header {
     background: var(--primary);
     font-weight: 700;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 0.75rem 0.5rem;
 }
 
 .time-slot {
     cursor: pointer;
     transition: all 0.3s;
     position: relative;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .time-slot.available {
@@ -387,6 +441,7 @@ section {
 .time-slot.available:hover {
     background: #C8E6C9;
     transform: scale(1.05);
+    z-index: 5;
 }
 
 .time-slot.booked {
@@ -398,6 +453,19 @@ section {
 .time-slot.selected {
     background: var(--accent);
     color: var(--white);
+    font-weight: bold;
+}
+
+.time-slot.selected::after {
+    content: '✓';
+    position: absolute;
+    font-size: 1.2rem;
+}
+
+.time-slot.past {
+    background: #e0e0e0;
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
 .booking-form {
