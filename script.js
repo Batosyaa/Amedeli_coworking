@@ -339,16 +339,10 @@ function updateSelectedSlots() {
         });
     });
     
-    // const days = {
-    //     ru: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
-    //     kz: ['Дүйсенбі', 'Сейсенбі', 'Сәрсенбі', 'Бейсенбі', 'Жұма', 'Сенбі', 'Жексенбі'],
-    //     en: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    // };
-    
     const timeText = selectedSlots.map(slot => {
-        const date = new Date(slot.date);
+        const date = new Date(slot.day);
         const dateStr = `${date.getDate()}.${(date.getMonth() + 1).toString().padStart(2, '0')}`;
-        return `${dateStr} ${slot.hour}`
+        return `${dateStr}: ${slot.hour}`
     }
     ).join('; ');
     

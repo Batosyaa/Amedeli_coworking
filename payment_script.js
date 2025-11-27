@@ -15,7 +15,6 @@ function loadBookingData() {
 
     bookingData = JSON.parse(data);
     displayBookingInfo();
-    generateQRCode();
     startTimer();
 }
 
@@ -52,34 +51,6 @@ function displayBookingInfo() {
     document.getElementById('bookingInfo').innerHTML = bookingInfo;
     document.getElementById('amountText').textContent = `${bookingData.depositAmount.toLocaleString()}₸`;
     document.getElementById('commentText').textContent = bookingData.bookingNumber;
-}
-
-// QR Code generation is in no need, we will replace it by a constant QR code image from Kaspi.
-function generateQRCode() {
-    const qrData = `kaspi://transfer?phone=+77008392517&amount=${bookingData.depositAmount}&comment=${bookingData.bookingNumber}`;
-            
-    const qrContainer = document.getElementById('qrCode');
-    qrContainer.innerHTML = '';
-            
-    QRCode.toCanvas(qrData, { 
-        width: 250,
-        margin: 2,
-        color: {
-            dark: '#000000',
-            light: '#FFFFFF'
-        }
-    }, function (error, canvas) {
-        if (error) {
-            console.error(error);
-            qrContainer.innerHTML = '<p style="color: red;">Ошибка генерации QR кода</p>';
-        } else {
-            qrContainer.appendChild(canvas);
-            const text = document.createElement('p');
-            text.style.marginTop = '1rem';
-            text.textContent = 'Отсканируйте в Kaspi.kz';
-            qrContainer.appendChild(text);
-        }
-    });
 }
 
 function startTimer() {
