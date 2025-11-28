@@ -470,15 +470,15 @@ document.getElementById('bookingForm').addEventListener('submit', async function
 
         console.log('Pricing calculated: ', pricing);
 
-        const today = new Date();
-        const dayOfWeek = today.getDay();
-        const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
-        const monday = new Date(today);
-        monday.setDate(monday.getDate() + mondayOffset);
-
+        // DELETED: All the incorrect Monday-based date calculation code (8 lines removed)
+        // ADDED: Direct use of the date from selectedSlots which is already in YYYY-MM-DD format
         const firstSlot = selectedSlots[0];
-        const bookingDate = new Date(monday);
-        bookingDate.setDate(monday.getDate() + (parseInt(firstSlot.day) - 1));
+        const bookingDate = new Date(firstSlot.day + 'T00:00:00'); // Parse as local date to avoid timezone issues
+        
+        // ADDED: Debug logging to verify correct date
+        console.log('First slot day:', firstSlot.day);
+        console.log('Booking date created:', bookingDate);
+        console.log('Booking date ISO:', bookingDate.toISOString().split('T')[0]);
 
         const times = selectedSlots.map(s => s.hour).sort();
         const startTime = times[0];
@@ -498,7 +498,7 @@ document.getElementById('bookingForm').addEventListener('submit', async function
                 client_phone: formData.phone,
                 client_email: formData.email || null,
                 guest_count: parseInt(formData.guestCount),
-                booking_date: bookingDate.toISOString().split('T')[0],
+                booking_date: firstSlot.day, // CHANGED: Use the date string directly instead of converting from Date object
                 start_time: startTime,
                 end_time: endTime,
                 time_slots: selectedSlots,
@@ -531,7 +531,7 @@ document.getElementById('bookingForm').addEventListener('submit', async function
             room_name: formData.room,
             selected_time: formData.time,
             additional_notes: formData.notes || "Нет дополнительных пожеланий.",
-            menu_preorder: formData.menu || "Нет предзаказа.",
+            menu_preorder: formData.menu.join(', ') || "Нет предзаказа.", // CHANGED: Added .join(', ') to convert array to string
             booking_date: new Date().toLocaleString('ru-RU')
         }
 
@@ -559,7 +559,7 @@ document.getElementById('bookingForm').addEventListener('submit', async function
             totalCost: pricing.totalCost,
             remainingAmount: pricing.remainingAmount,
             roomName: formData.room,
-            bookingDate: bookingDate.toLocaleDateString('ru-RU'),
+            bookingDate: new Date(firstSlot.day).toLocaleDateString('ru-RU'), // CHANGED: Parse from firstSlot.day instead of bookingDate variable
             timeRange: `${startTime} - ${endTime}`,
             clientName: formData.name,
             expiresAt: paymentExpiry.toISOString()

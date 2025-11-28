@@ -49,6 +49,8 @@ function displayBookingInfo() {
     `;
             
     document.getElementById('bookingInfo').innerHTML = bookingInfo;
+    document.getElementById('amount_Text').textContent = `${bookingData.depositAmount.toLocaleString()}₸`;
+    document.getElementById('comment_Text').textContent = bookingData.bookingNumber;
     document.getElementById('amountText').textContent = `${bookingData.depositAmount.toLocaleString()}₸`;
     document.getElementById('commentText').textContent = bookingData.bookingNumber;
 }
@@ -100,9 +102,7 @@ async function confirmPayment() {
         return;
     }
 
-    try {
-        // Soon we will make an approval system via Kaspi API, for now we just set status to 'verifying'
-                
+    try {                
         const { error } = await supabase
             .from('bookings')
             .update({ 
@@ -118,7 +118,7 @@ async function confirmPayment() {
         const whatsappMessage = encodeURIComponent(
             `Здравствуйте! Я оплатил бронирование ${bookingData.bookingNumber}. Сумма: ${bookingData.depositAmount}₸`
         );
-        window.open(`https://wa.me/77076133843?text=${whatsappMessage}`, '_blank');
+        window.open(`https://wa.me/77074197972?text=${whatsappMessage}`, '_blank');
                 
         sessionStorage.removeItem('pendingBooking');
         window.location.href = 'index.html';

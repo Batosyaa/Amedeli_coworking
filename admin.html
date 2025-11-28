@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - AMIDELI HUB</title>
     <link rel="stylesheet" href="admin_style.css">
 </head>
+
 <body>
     <div class="login-container" id="loginPage">
         <div class="login-box">
             <div class="login-logo">☘ AMIDELI HUB</div>
             <h2 style="text-align: center; margin-bottom: 2rem;">Admin Panel</h2>
-            
+
             <div class="error-message" id="loginError">
                 Неверный пароль
             </div>
@@ -30,6 +32,8 @@
         <div class="header">
             <div class="header-title">☘ AMIDELI HUB - Admin Panel</div>
             <div class="header-info">
+                <button class="btn btn-primary btn-small" onclick="openNewBookingModal()">+ Новое
+                    бронирование</button>
                 <div class="auto-refresh-status">
                     <span id="refreshIcon">🔄</span>
                     <span>Авто-обновление: 30 сек</span>
@@ -111,6 +115,63 @@
                 </div>
                 <div id="cancelledBookings">
                     <div class="loading">Загрузка...</div>
+                </div>
+            </div>
+
+            
+            <!-- Booking Modal -->
+            <div id="bookingModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal" onclick="closeModal()">&times;</span>
+                    <h2 id="modalTitle">Новое бронирование</h2>
+                
+                    <div class="room-selector">
+                        <button class="room-btn active" onclick="selectRoom('conference')">Конференц-зал</button>
+                        <button class="room-btn" onclick="selectRoom('studio')">Контент-студия</button>
+                        <button class="room-btn" onclick="selectRoom('meeting-a')">Переговорная A</button>
+                        <button class="room-btn" onclick="selectRoom('meeting-b')">Переговорная B</button>
+                        <button class="room-btn" onclick="selectRoom('meeting-c')">Переговорная C</button>
+                        <button class="room-btn" onclick="selectRoom('meeting-d')">Переговорная D</button>
+                        <button class="room-btn" onclick="selectRoom('workspace-1')">Место 1</button>
+                        <button class="room-btn" onclick="selectRoom('workspace-2')">Место 2</button>
+                        <button class="room-btn" onclick="selectRoom('workspace-3')">Место 3</button>
+                        <button class="room-btn" onclick="selectRoom('workspace-4')">Место 4</button>
+                        <button class="room-btn" onclick="selectRoom('workspace-5')">Место 5</button>
+                    </div>
+                
+                    <div class="timetable-container">
+                        <h3 style="text-align: center; margin-bottom: 1rem;">Выберите время</h3>
+                        <div class="timetable">
+                            <div class="timetable-grid" id="timetableGrid">
+                                <!-- JS will populate this -->
+                            </div>
+                        </div>
+                    </div>
+                
+                    <form id="adminBookingForm" style="margin-top: 2rem;">
+                        <input type="hidden" id="editingBookingId">
+                        <div class="form-group">
+                            <label>Имя клиента</label>
+                            <input type="text" id="clientName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Телефон</label>
+                            <input type="tel" id="clientPhone" required placeholder="+7 (___) ___-__-__">
+                        </div>
+                        <div class="form-group">
+                            <label>Количество гостей</label>
+                            <input type="number" id="guestCount" value="1" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Примечания</label>
+                            <textarea id="additionalNotes" rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Выбрано:</label>
+                            <input type="text" id="selectedTime" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Сохранить бронирование</button>
+                    </form>
                 </div>
             </div>
         </div>

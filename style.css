@@ -1,18 +1,134 @@
-  * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-  :root {
-      --bg-color: #FFDFC0;
-      --primary: #EAC9A8;
-      --text: #3C3C3C;
-      --accent: #D38F61;
-      --border: #C2B8AF;
-      --white: #FFFFFF;
-      --shadow: rgba(0, 0, 0, 0.05);
-      --radius: 20px;
+@property --y {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: -10%;
+}
+
+.snowfall, 
+.snowfall::before, 
+.snowfall::after {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background-repeat: no-repeat;
+
+    background-image: /* in case of frezzes, decrease the amount of radial-gradients */
+        radial-gradient(circle at 15% calc(var(--y) * 0.9),   #fff 2.5px, transparent 4px),
+        radial-gradient(circle at 28% calc(var(--y) * 1.2), #fff 3px,   transparent 5px),
+        radial-gradient(circle at 52% calc(var(--y) * 0.8),  #fff 2px,   transparent 3.5px),
+        radial-gradient(circle at 18% calc(var(--y) * 1.1), #fff 3.5px, transparent 5.5px),
+        radial-gradient(circle at 72% calc(var(--y) * 0.6), #fff 2.5px, transparent 4px),
+        radial-gradient(circle at 42% calc(var(--y) * 0.95), #fff 3px,   transparent 5px),
+        radial-gradient(circle at 85% calc(var(--y) * 1.15), #fff 3.5px, transparent 5.5px),
+        radial-gradient(circle at 22% calc(var(--y) * 0.65), #fff 2.8px, transparent 4.5px),
+        radial-gradient(circle at 60% calc(var(--y) * 0.75), #fff 3.2px, transparent 5px),
+        radial-gradient(circle at 75% calc(var(--y) * 0.85), #fff 3px,   transparent 5px),
+        radial-gradient(circle at 38% calc(var(--y) * 1.05), #fff 2.5px, transparent 4px),
+        radial-gradient(circle at 8% calc(var(--y) * 0.95),  #fff 3.5px, transparent 5.5px),
+        radial-gradient(circle at 92% calc(var(--y) * 0.7), #fff 2.8px, transparent 4.5px),
+        radial-gradient(circle at 35% calc(var(--y) * 0.8), #fff 3px,   transparent 5px),
+        radial-gradient(circle at 68% calc(var(--y) * 1.0), #fff 3.2px, transparent 5px),
+        radial-gradient(circle at 12% calc(var(--y) * 0.9), #fff 2.5px, transparent 4px),
+        radial-gradient(circle at 55% calc(var(--y) * 0.7), #fff 3.5px, transparent 5.5px),
+        radial-gradient(circle at 80% calc(var(--y) * 0.95),  #fff 3px,   transparent 5px),
+        radial-gradient(circle at 30% calc(var(--y) * 1.1), #fff 2.8px, transparent 4.5px),
+        radial-gradient(circle at 98% calc(var(--y) * 0.65), #fff 3.2px, transparent 5px),
+        radial-gradient(circle at 5% calc(var(--y) * 1.0), #fff 3px,   transparent 5px),
+        radial-gradient(circle at 65% calc(var(--y) * 0.8), #fff 2.5px, transparent 4px);
+} 
+
+/* 1st layer */
+.snowfall {
+    animation: snowfall 35s linear infinite;
+    background-size: 100% 100%;
+    inset: -10rem 0 0;
+    opacity: 0.9;
+}
+
+/* 2nd layer */
+.snowfall::before {
+    content: '';
+    inset: -8rem 0 0;
+    opacity: 0.7;
+    animation:  
+            snowfall 25s linear infinite,
+            wind 12s ease-in-out infinite;
+    animation-delay: -5s, -3s;
+    background-size: 95% 100%;
+}
+
+/* 3rd and final layer */
+.snowfall::after {
+    content: '';
+    inset: -6rem 0 0;
+    opacity: 0.6;
+    animation: 
+            snowfall 17s linear infinite,
+            windReverse 15s ease-in-out infinite;
+    background-size: 90%, 100%;
+}
+
+@keyframes snowfall {
+    0% {
+        --y: -10%;
+    }
+    100% {
+        --y: 110%;
+    }
+}
+
+@keyframes wind {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(30px);
+    }
+    50% {
+        transform: translateX(-20px);
+    }
+    75% {
+        transform: translateX(40px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes windReverse {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-35px);
+    }
+    50% {
+        transform: translateX(25px);
+    }
+    75% {
+        transform: translateX(-30px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+:root {
+    --bg-color: #FFDFC0;
+    --primary: #EAC9A8;
+    --text: #3C3C3C;
+    --accent: #D38F61;
+    --border: #C2B8AF;
+    --white: #FFFFFF;
+    --shadow: rgba(0, 0, 0, 0.05);
+    --radius: 20px;
 }
 
 body {
@@ -21,6 +137,7 @@ body {
     color: var(--text);
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative; /* The test for the snowflakes */
 }
 
 nav {
