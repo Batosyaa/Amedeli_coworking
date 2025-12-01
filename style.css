@@ -31,17 +31,7 @@
         radial-gradient(circle at 60% calc(var(--y) * 0.75), #fff 3.2px, transparent 5px),
         radial-gradient(circle at 75% calc(var(--y) * 0.85), #fff 3px,   transparent 5px),
         radial-gradient(circle at 38% calc(var(--y) * 1.05), #fff 2.5px, transparent 4px),
-        radial-gradient(circle at 8% calc(var(--y) * 0.95),  #fff 3.5px, transparent 5.5px),
-        radial-gradient(circle at 92% calc(var(--y) * 0.7), #fff 2.8px, transparent 4.5px),
-        radial-gradient(circle at 35% calc(var(--y) * 0.8), #fff 3px,   transparent 5px),
-        radial-gradient(circle at 68% calc(var(--y) * 1.0), #fff 3.2px, transparent 5px),
-        radial-gradient(circle at 12% calc(var(--y) * 0.9), #fff 2.5px, transparent 4px),
-        radial-gradient(circle at 55% calc(var(--y) * 0.7), #fff 3.5px, transparent 5.5px),
-        radial-gradient(circle at 80% calc(var(--y) * 0.95),  #fff 3px,   transparent 5px),
-        radial-gradient(circle at 30% calc(var(--y) * 1.1), #fff 2.8px, transparent 4.5px),
-        radial-gradient(circle at 98% calc(var(--y) * 0.65), #fff 3.2px, transparent 5px),
-        radial-gradient(circle at 5% calc(var(--y) * 1.0), #fff 3px,   transparent 5px),
-        radial-gradient(circle at 65% calc(var(--y) * 0.8), #fff 2.5px, transparent 4px);
+        radial-gradient(circle at 8% calc(var(--y) * 0.95),  #fff 3.5px, transparent 5.5px);
 } 
 
 /* 1st layer */
@@ -50,6 +40,7 @@
     background-size: 100% 100%;
     inset: -10rem 0 0;
     opacity: 0.9;
+    will-change: transform;
 }
 
 /* 2nd layer */
@@ -62,6 +53,7 @@
             wind 12s ease-in-out infinite;
     animation-delay: -5s, -3s;
     background-size: 95% 100%;
+    will-change: transform;
 }
 
 /* 3rd and final layer */
@@ -72,7 +64,8 @@
     animation: 
             snowfall 17s linear infinite,
             windReverse 15s ease-in-out infinite;
-    background-size: 90%, 100%;
+    background-size: 90% 100%;
+    will-change: transform;
 }
 
 @keyframes snowfall {
@@ -117,6 +110,113 @@
     }
     100% {
         transform: translateX(0);
+    }
+}
+
+/* Styles for the carousel */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 40px var(--shadow);
+}
+
+.carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 10%;
+    height: 13%;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--accent);
+    transition: all 0.3s;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-arrow:hover {
+    background: var(--accent);
+    color: var(--white);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow.prev {
+    left: 25px;
+}
+
+.carousel-arrow.next {
+    right: 25px;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid var(--white);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.carousel-indicator.active {
+    background: var(--accent);
+    transform: scale(1.2);
+}
+
+.carousel-indicator:hover {
+    background: var(--white);
+}
+
+@media (max-width: 768px) {
+    .carousel-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .carousel-arrow.prev {
+        left: 10px;
+    }
+    
+    .carousel-arrow.next {
+        right: 10px;
     }
 }
 
@@ -295,12 +395,6 @@ nav {
     box-shadow: 0 10px 40px var(--shadow);
     position: relative;
     overflow: hidden;
-}
-
-.hero-image::before {
-    content: '🏢';
-    font-size: 8rem;
-    opacity: 0.3;
 }
 
 .btn {

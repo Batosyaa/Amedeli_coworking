@@ -130,6 +130,232 @@ phoneInput.addEventListener('paste', function(e) {
     }
 });
 
+class PhotoCarousel {
+    constructor() {
+        this.track = document.getElementById('carouselTrack');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        this.indicatorsContainer = document.getElementById('carouselIndicators');
+
+        if (!this.track || !this.prevBtn || !this.nextBtn || !this.indicatorsContainer) { 
+            console.warn('Carousel elemenets are not found!');
+            return;
+        }
+    
+        this.slides = Array.from(this.track.children);
+        this.currentIndex = 0;
+        this.autoplayInterval = null;
+        this.autoplayDelay = 5000;
+
+        this.isDragging = false;
+        this.startX = 0;
+        this.currentX = 0;
+        this.dragThreshold = 50;
+
+        this.init();
+    }
+
+    init() {
+        this.createIndicators();
+
+        this.prevBtn.addEventListener('click', () => {
+            this.prevSlide();
+            this.resetAutoplay();
+        });
+
+        this.nextBtn.addEventListener('click', () => {
+            this.nextSlide();
+            this.resetAutoplay();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                this.prevSlide();
+                this.resetAutoplay();
+            }
+            if (e.key === 'ArrowRight') {
+                this.nextSlide();
+                this.resetAutoplay();
+            }
+        });
+
+        this.setupInteractionSupport();
+
+        this.startAutoplay();
+
+        this.track.parentElement.addEventListener('mouseenter', () => {
+            if (!this.isDragging) {
+                this.stopAutoplay();
+            }
+        });
+        
+        this.track.parentElement.addEventListener('mouseleave', () => {
+            if (!this.isDragging) {
+                this.startAutoplay();
+            }
+        });
+    }
+
+    createIndicators() {
+        this.slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('carousel-indicator');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                this.goToSlide(index);
+                this.resetAutoplay();
+            });
+            this.indicatorsContainer.appendChild(dot);
+        });
+        this.indicators = Array.from(this.indicatorsContainer.children);
+    }
+
+    updateIndicators() {
+        this.indicators.forEach((indicator, index) => {
+            if (index === this.currentIndex) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+
+    goToSlide(index) {
+        this.currentIndex = index;
+        const offset = -100 * this.currentIndex;
+        this.track.style.transform = `translateX(${offset}%)`;
+        this.updateIndicators();
+    }
+
+    nextSlide() {
+        this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+        this.goToSlide(this.currentIndex);
+    }
+
+    prevSlide() {
+        this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+        this.goToSlide(this.currentIndex);
+    }
+
+    startAutoplay() {
+
+        if (this.autoplayInterval) {
+            return;
+        }
+
+        this.autoplayInterval = setInterval(() => {
+            this.nextSlide();
+        }, this.autoplayDelay);
+    }
+
+    stopAutoplay() {
+        if (this.autoplayInterval) {
+            clearInterval(this.autoplayInterval);
+            this.autoplayInterval = null;
+        }
+    }
+
+    resetAutoplay() {
+        this.stopAutoplay();
+        this.startAutoplay();
+    }
+
+    setupInteractionSupport() {
+        const container = this.track.parentElement;
+
+        container.style.cursor = 'grab';
+
+        container.addEventListener('touchstart', (e) => {
+            this.handleDragStart(e.touches[0].clientX);
+        }, { passive: true });
+
+        container.addEventListener('touchmove', (e) => {
+            if (this.isDragging) {
+                this.handleDragMove(e.touches[0].clientX);
+            }
+        }, { passive: true });
+
+        container.addEventListener('touchend', () => {
+            this.handleDragEnd();
+        });
+
+        // For moving carousel with the mouse
+        container.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            this.handleDragStart(e.clientX);
+            container.style.cursor = 'grabbing';
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (this.isDragging) {
+                this.handleDragMove(e.clientX);
+            }
+        });
+
+        container.addEventListener('mouseup', () => {
+            if (this.isDragging) {
+                this.handleDragEnd();
+                container.style.cursor = 'grab';
+            }
+        });
+
+        container.addEventListener('mouseleave', () => {
+            if (this.isDragging) {
+                this.handleDragEnd()
+                container.style.cursor = 'grab';
+            }
+        });
+
+        container.addEventListener('click', (e) => {
+            if (this.wasDragging) {
+                e.preventDefault();
+                this.wasDragging = false;
+            }
+        }, true);
+    }
+
+    handleDragStart(clientX) {
+        this.isDragging = true;
+        this.startX = clientX;
+        this.currentX = clientX;
+        this.wasDragging = false;
+        this.stopAutoplay();
+    }
+
+    handleDragMove(clientX) {
+        if (!this.isDragging) {
+            return;
+        }
+
+        this.currentX = clientX;
+
+        if (Math.abs(this.currentX - this.startX) > 5) {
+            this.wasDragging = true;
+        }
+    }
+
+    handleDragEnd() {
+        if (!this.isDragging) return;
+
+        this.isDragging = false;
+        const diff = this.startX - this.currentX;
+
+        if (Math.abs(diff) > this.dragThreshold) {
+            if (diff > 0) {
+                this.nextSlide();
+            } else {
+                this.prevSlide();
+            }
+        }
+
+        this.startAutoplay();
+
+        setTimeout(() => {
+            this.wasDragging = false;
+        }, 100);
+    }
+}
+
 let selectedRoom = 'conference';
 let selectedSlots = [];
 const roomData = {
@@ -589,6 +815,8 @@ document.addEventListener('DOMContentLoaded', function() {
     generateTimetable();
     generateMenuPreorder();
     document.getElementById('selectedRoom').value = roomData[selectedRoom].name[currentLang];
+
+    new PhotoCarousel();
 });
 
 function switchLang(lang) {
