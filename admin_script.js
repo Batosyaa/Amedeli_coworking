@@ -752,8 +752,8 @@ async function generateTimetable() {
             cell.innerHTML = `${dayName}<br><small>${dateStr}</small>`;
             
             if (date.toDateString() === today.toDateString()) {
-                cell.style.background = '#D38F61';
-                cell.style.color = 'white';
+                cell.style.background = '#c9a961';
+                cell.style.color = '#1a1612';
                 cell.style.fontWeight = '700';
             }
             

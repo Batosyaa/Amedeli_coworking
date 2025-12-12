@@ -5,11 +5,11 @@
         }
 
         :root {
-            --bg-color: #FFDFC0;
-            --primary: #EAC9A8;
-            --text: #3C3C3C;
-            --accent: #D38F61;
-            --border: #C2B8AF;
+            --bg-color: #1a1612;
+            --primary: #2a2520;
+            --text: #e8e6e3;
+            --accent: #c9a961;
+            --border: #3d3530;
             --white: #FFFFFF;
             --success: #4CAF50;
             --warning: #FF9800;
@@ -37,16 +37,17 @@
             background: var(--white);
             border-radius: var(--radius);
             padding: 3rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             max-width: 400px;
             width: 100%;
+            color: #1a1612;
         }
 
         .login-logo {
             text-align: center;
             font-size: 2rem;
             font-weight: 700;
-            color: var(--accent);
+            color: #1a1612;
             margin-bottom: 2rem;
         }
 
@@ -58,6 +59,7 @@
             display: block;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            color: #1a1612;
         }
 
         .form-group input {
@@ -67,11 +69,18 @@
             border-radius: 15px;
             font-size: 1rem;
             transition: all 0.3s;
+            background: var(--white);
+            color: #1a1612;
         }
 
         .form-group input:focus {
             outline: none;
             border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            background: var(--white);
+            color: #1a1612;
         }
 
         .btn {
@@ -153,18 +162,19 @@
         .header {
             background: var(--white);
             padding: 1.5rem 5%;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
+            color: #1a1612;
         }
 
         .header-title {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--accent);
+            color: #1a1612;
         }
 
         .header-info {
@@ -175,6 +185,11 @@
 
         .admin-name {
             font-weight: 600;
+            color: #1a1612;
+        }
+
+        .auto-refresh-status {
+            color: #1a1612;
         }
 
         .logout-btn {
@@ -209,7 +224,8 @@
             background: var(--white);
             padding: 1.5rem;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: #1a1612;
         }
 
         .stat-icon {
@@ -220,12 +236,13 @@
         .stat-value {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--accent);
+            color: #1a1612;
         }
 
         .stat-label {
             font-size: 0.9rem;
             opacity: 0.7;
+            color: #1a1612;
         }
 
         .section {
@@ -233,7 +250,8 @@
             border-radius: var(--radius);
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: #1a1612;
         }
 
         .section-header {
@@ -251,6 +269,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            color: #1a1612;
         }
 
         .badge {
@@ -262,11 +281,12 @@
         }
 
         .booking-card {
-            background: var(--bg-color);
+            background: var(--primary);
             border-radius: 15px;
             padding: 1.5rem;
             margin-bottom: 1rem;
             border-left: 4px solid var(--accent);
+            color: var(--text);
         }
 
         .booking-card.pending {
@@ -275,6 +295,14 @@
 
         .booking-card.confirmed {
             border-left-color: var(--success);
+        }
+
+        .booking-card a {
+            color: var(--accent);
+        }
+
+        .booking-card strong {
+            color: var(--text);
         }
 
         .booking-card.cancelled {
@@ -321,11 +349,13 @@
 
         .info-label {
             font-size: 0.85rem;
-            opacity: 0.7;
+            opacity: 0.85;
+            color: var(--text);
         }
 
         .info-value {
             font-weight: 600;
+            color: var(--text);
         }
 
         .booking-actions {
@@ -337,7 +367,7 @@
         .empty-state {
             text-align: center;
             padding: 3rem;
-            color: var(--text);
+            color: #1a1612;
             opacity: 0.5;
         }
 
@@ -360,12 +390,14 @@
             border-radius: 10px;
             font-size: 0.9rem;
             cursor: pointer;
+            background: var(--white);
+            color: #1a1612;
         }
 
         .loading {
             text-align: center;
             padding: 2rem;
-            color: var(--accent);
+            color: #1a1612;
         }
 
         .refresh-indicator {
@@ -415,6 +447,7 @@
             overflow-y: auto;
             position: relative;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); 
+            color: #1a1612;
         }
 
         .close-modal {
@@ -424,7 +457,7 @@
         #modalTitle {
             text-align: center;
             margin-bottom: 2rem;
-            color: var(--accent);
+            color: #1a1612;
         }
 
         .modal-content .timetable {
@@ -454,6 +487,7 @@
             font-weight: 600;
             transition: all 0.3s;
             font-size: 0.9rem;
+            color: var(--text);
         }
 
         .room-btn.active {
@@ -492,6 +526,7 @@
             font-weight: 600;
             min-width: 100px;
             font-size: 0.85rem;
+            color: var(--text);
         }
 
         .time-header {
@@ -518,22 +553,25 @@
         }
 
         .time-slot.available {
-            background: #C8E6C9;
+            background: #3a4a3d;
+            color: var(--text);
         }
 
         .time-slot.available:hover {
-            background: #C8E6C9;
+            background: #4a5a4d;
             transform: scale(1.05);
         }
 
         .time-slot.booked {
-            background: #FFEBEE;
+            background: #4a2c2c;
             cursor: not-allowed;
             opacity: 0.6;
+            color: var(--text);
         }
 
         .time-slot.selected {
-            background-color: #988f88;
+            background-color: var(--accent);
+            color: #1a1612;
         }
 
         .time-slot.selected::after {
@@ -542,7 +580,9 @@
         }
 
         .time-slot.past {
-            background: #e0e0e0;
+            background: #3d3530;
+            color: var(--text);
+            opacity: 0.5;
         }
 
         @media (max-width: 768px) {

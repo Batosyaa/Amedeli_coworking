@@ -493,13 +493,13 @@ async function generateTimetable() {
             cell.className = 'day-header';
             
             if (date.toDateString() === today.toDateString()) {
-                cell.style.background = '#D38F61';
-                cell.style.color = 'white';
+                cell.style.background = '#c9a961';
+                cell.style.color = '#e8e6e3';
                 cell.style.fontWeight = '700';
             }
             
             if (dayIndex === 0 || dayIndex === 6) {
-                cell.style.background = '#FFE5CC';
+                cell.style.background = '#3d3530';
             }
             
             cell.innerHTML = `${dayName}<br><small style="font-size: 0.85em; opacity: 0.8;">${dateStr}</small>`;

@@ -145,7 +145,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(42, 37, 32, 0.9);
     border: none;
     width: 10%;
     height: 13%;
@@ -163,7 +163,7 @@
 
 .carousel-arrow:hover {
     background: var(--accent);
-    color: var(--white);
+    color: #1a1612;
     transform: translateY(-50%) scale(1.1);
 }
 
@@ -197,6 +197,7 @@
 
 .carousel-indicator.active {
     background: var(--accent);
+    background-color: var(--accent);
     transform: scale(1.2);
 }
 
@@ -221,13 +222,13 @@
 }
 
 :root {
-    --bg-color: #FFDFC0;
-    --primary: #EAC9A8;
-    --text: #3C3C3C;
-    --accent: #D38F61;
-    --border: #C2B8AF;
+    --bg-color: #1a1612;
+    --primary: #2a2520;
+    --text: #e8e6e3;
+    --accent: #c9a961;
+    --border: #3d3530;
     --white: #FFFFFF;
-    --shadow: rgba(0, 0, 0, 0.05);
+    --shadow: rgba(0, 0, 0, 0.3);
     --radius: 20px;
 }
 
@@ -245,7 +246,7 @@ nav {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 223, 192, 0.95);
+    background: rgba(26, 22, 18, 0.95);
     backdrop-filter: blur(10px);
     padding: 1rem 5%;
     display: flex;
@@ -361,7 +362,7 @@ nav {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     color: var(--text);
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .hero-stats {
@@ -453,7 +454,7 @@ section {
 .section-subtitle {
     text-align: center;
     font-size: 1.1rem;
-    opacity: 0.7;
+    opacity: 0.85;
     max-width: 600px;
     margin: 0 auto 4rem;
 }
@@ -472,6 +473,7 @@ section {
     box-shadow: 0 5px 20px var(--shadow);
     transition: all 0.3s;
     border: 2px solid transparent;
+    color: #1a1612;
 }
 
 .facility-card:hover {
@@ -491,7 +493,7 @@ section {
 }
 
 .facility-card p {
-    opacity: 0.7;
+    opacity: 0.85;
     margin-bottom: 1rem;
 }
 
@@ -524,6 +526,7 @@ section {
     box-shadow: 0 10px 40px var(--shadow);
     max-width: 1200px;
     margin: 0 auto;
+    color: #1a1612;
 }
 
 .timetable-container {
@@ -546,6 +549,7 @@ section {
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s;
+    color: var(--text);
 }
 
 .room-btn.active {
@@ -574,6 +578,7 @@ section {
     overflow: hidden;
     min-width: fit-content;
     padding: 1px;
+    color: var(--text);
 }
 
 .timetable::after {
@@ -616,6 +621,7 @@ section {
     text-align: center;
     font-weight: 600;
     min-width: 100px;
+    color: var(--text);
 }
 
 .time-header {
@@ -633,6 +639,7 @@ section {
     top: 0;
     z-index: 10;
     padding: 0.75rem 0.5rem;
+    color: var(--white);
 }
 
 .time-slot {
@@ -646,17 +653,17 @@ section {
 }
 
 .time-slot.available {
-    background: #E8F5E9;
+    background: #3a4a3d;
 }
 
 .time-slot.available:hover {
-    background: #C8E6C9;
+    background: #4a5a4d;
     transform: scale(1.05);
     z-index: 5;
 }
 
 .time-slot.booked {
-    background: #FFEBEE;
+    background: #4a2c2c;
     cursor: not-allowed;
     opacity: 0.6;
 }
@@ -701,6 +708,7 @@ section {
 .form-group label {
     font-weight: 600;
     margin-bottom: 0.5rem;
+    color: #e0e0e0;
 }
 
 .form-group input, .form-group select, .form-group textarea {
@@ -711,6 +719,7 @@ section {
     font-size: 1rem;
     transition: all 0.3s;
     background: var(--white);
+    color: #1a1612;
 }
 
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
@@ -735,6 +744,7 @@ section {
     border-radius: var(--radius);
     padding: 2rem;
     box-shadow: 0 5px 20px var(--shadow);
+    color: #1a1612;
 }
 
 .menu-category h3 {
@@ -750,6 +760,7 @@ section {
     align-items: center;
     padding: 0.75rem 0;
     border-bottom: 1px solid var(--border);
+    color: #1a1612;
 }
 
 .menu-item:last-child {
@@ -769,6 +780,7 @@ section {
     display: flex;
     gap: 1rem;
     font-size: 0.9rem;
+    opacity: 0.8;
 }
 
 footer {
@@ -795,6 +807,7 @@ footer {
     text-decoration: none;
     display: block;
     margin-bottom: 0.5rem;
+    opacity: 0.95;
 }
 
 .footer-section a:hover {
@@ -887,9 +900,9 @@ footer {
 }
 
 .success-message {
-    background: #E8F5E9;
+    background: #2a3a2d;
     border: 2px solid #4CAF50;
-    color: #2E7D32;
+    color: #a8d5ab;
     padding: 1.5rem;
     border-radius: var(--radius);
     margin: 2rem 0;
@@ -913,7 +926,7 @@ footer {
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem;
-    background: var(--white);
+    background: var(--primary);
     border-radius: 10px;
     border: 2px solid var(--border);
     cursor: pointer;

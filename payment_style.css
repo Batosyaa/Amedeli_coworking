@@ -5,11 +5,11 @@
 }
 
 :root {
-    --bg-color: #FFDFC0;
-    --primary: #EAC9A8;
-    --text: #3C3C3C;
-    --accent: #D38F61;
-    --border: #C2B8AF;
+    --bg-color: #1a1612;
+    --primary: #2a2520;
+    --text: #e8e6e3;
+    --accent: #c9a961;
+    --border: #3d3530;
     --white: #FFFFFF;
     --success: #4CAF50;
     --error: #f44336;
@@ -33,7 +33,8 @@ body {
     background: var(--white);
     border-radius: var(--radius);
     padding: 3rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    color: #1a1612;
 }
 
 .logo {
@@ -41,14 +42,15 @@ body {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    color: var(--accent);
+    color: #1a1612;
 }
 
 .booking-info {
-    background: var(--bg-color);
+    background: var(--primary);
     border-radius: 15px;
     padding: 2rem;
     margin-bottom: 2rem;
+    color: var(--text);
 }
 
 .info-row {
@@ -68,13 +70,19 @@ body {
     border-top: 2px solid var(--accent);
 }
 
+.info-row:last-child .info-label,
+.info-row:last-child .info-value {
+    color: var(--accent);
+}
+
 .info-label {
     color: var(--text);
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 .info-value {
     font-weight: 600;
+    color: var(--text);
 }
 
 .qr-section {
@@ -83,6 +91,11 @@ body {
     background: var(--primary);
     border-radius: 15px;
     margin: 2rem 0;
+    color: var(--text);
+}
+
+.qr-section h2 {
+    color: var(--text);
 }
 
 .qr-code {
@@ -95,6 +108,7 @@ body {
     justify-content: center;
     margin: 1.5rem auto;
     width: fit-content;
+    color: #1a1612;
 }
 
 .kaspi-numLink {
@@ -102,6 +116,8 @@ body {
     font-weight: 700;
     color: var(--accent);
     margin: 1rem 0;
+    text-decoration: none;
+    display: block;
 }
 
 .timer {
@@ -112,16 +128,23 @@ body {
 }
 
 .instructions {
-    background: #E3F2FD;
-    border-left: 4px solid #2196F3;
+    background: var(--primary);
+    border-left: 4px solid var(--accent);
     padding: 1.5rem;
     border-radius: 10px;
     margin: 2rem 0;
+    color: var(--text);
 }
 
 .instructions h3 {
-    color: #1976D2;
+    color: var(--accent);
     margin-bottom: 1rem;
+}
+
+.instructions h4 {
+    color: var(--text);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .instructions ol {
@@ -130,6 +153,15 @@ body {
 
 .instructions li {
     margin: 0.5rem 0;
+}
+
+.instructions a {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.instrucitons strong {
+    color: var(--accent);
 }
 
 .btn {
@@ -161,14 +193,14 @@ body {
 
 .btn-secondary:hover {
     background: var(--text);
-    color: white;
+    color: var(--text);
 }
 
 .booking-number {
     text-align: center;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--accent);
+    color: #1a1612;
     margin-bottom: 2rem;
 }
 
