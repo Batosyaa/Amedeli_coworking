@@ -138,6 +138,15 @@
                         <button class="room-btn" onclick="selectRoom('workspace-4')">Место 4</button>
                         <button class="room-btn" onclick="selectRoom('workspace-5')">Место 5</button>
                     </div>
+
+                    <div class="equipment-selector" id="equipmentSelectorAdmin" style="display: none;">
+                        <label class="equipment-toggle">
+                            <input type="checkbox" id="equipmentCheckboxAdmin" checked onchange="toggleEquipmentAdmin()">
+                            <span class="equipment-slider"></span>
+                            <span class="equipment-label">+ Оборудование (флипчарт, проектор, доска, кликер)</span>
+                            <span class="equipment-price">+2,000₸/час</span>
+                        </label>
+                    </div>
                 
                     <div class="timetable-container">
                         <h3 style="text-align: center; margin-bottom: 1rem;">Выберите время</h3>

@@ -127,6 +127,7 @@
                 <h3 data-ru="Конференц-зал" data-kz="Конференц-зал" data-en="Conference Hall">Конференц-зал</h3>
                 <p data-ru="Вместимость до 30 человек" data-kz="30 адамға дейін" data-en="Up to 30 people">Вместимость до 30 человек</p>
                 <div class="facility-price">10,000₸/<span data-ru="час" data-kz="сағат" data-en="hour">час</span></div>
+                <div class="facility-price">12,000₸<span data-ru="с оборудованием" data-kz="құрал жабдығымен" data-en="with equipment">с оборудованием</span></div>
                 <ul class="facility-features">
                     <li data-ru="Флипчарт" data-kz="Флипчарт" data-en="Flipchart">✓ Флипчарт</li>
                     <li data-ru="Проектор" data-kz="Проектор" data-en="Projector">✓ Проектор</li>
@@ -139,7 +140,7 @@
                 <div class="facility-icon">🎥</div>
                 <h3 data-ru="Контент-студия" data-kz="Контент-студия" data-en="Content Studio">Контент-студия</h3>
                 <p data-ru="Профессиональное оборудование для съемок" data-kz="Түсірілімге арналған кәсіби жабдық" data-en="Professional shooting equipment">Профессиональное оборудование для съемок</p>
-                <div class="facility-price">8,000₸ - 10,000₸/<span data-ru="час" data-kz="сағат" data-en="hour">час</span></div>
+                <div class="facility-price">10,000₸ - 12,000₸/<span data-ru="час" data-kz="сағат" data-en="hour">час</span></div>
                 <ul class="facility-features">
                     <li data-ru="Два софтбокса Godox" data-kz="Екі Godox софтбоксы" data-en="Two Godox Softboxes">✓ Два софтбокса Godox</li>
                     <li data-ru="Штатив" data-kz="Штатив" data-en="Tripod">✓ Штатив</li>
@@ -437,6 +438,15 @@
             <button class="room-btn" onclick="selectRoom('workspace-5')" data-ru="Место 5" data-kz="Орын 5" data-en="Desk 5">Место 5</button>
         </div>
         
+        <div class="equipment-selector" id="equipmentSelector" style="display: none;">
+            <label class="equipment-toggle">
+                <input type="checkbox" id="equipmentCheckbox" checked onchange="toggleEquipment()">
+                <span class="equipment-slider"></span>
+                <span class="equipment-label">+ Оборудование (флипчарт, проектор, доска, кликер)</span>
+                <span class="equipment-price" id="equipmentPrice">+2,000₸/час</span>
+            </label>
+        </div>        
+
         <div class="timetable-container">
             <h3 class="text-center mb-2" data-ru="Расписание на неделю" data-kz="Апта кестесі" data-en="Weekly Schedule">Расписание на неделю</h3>
             <div class="timetable">

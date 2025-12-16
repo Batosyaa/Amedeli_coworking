@@ -845,6 +845,98 @@ footer {
     border-top: 2px solid var(--border);
 }
 
+/* Equipment Selector Styles */
+.equipment-selector {
+    margin: 2rem auto;
+    max-width: 600px;
+    padding: 1.5rem;
+    background: var(--primary);
+    border-radius: 15px;
+    border: 2px solid var(--border);
+}
+
+.equipment-toggle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.equipment-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.equipment-slider {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: var(--border);
+    border-radius: 30px;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.equipment-slider::before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--white);
+    top: 3px;
+    left: 3px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.equipment-toggle input[type="checkbox"]:checked + .equipment-slider {
+    background: var(--accent);
+}
+
+.equipment-toggle input[type="checkbox"]:checked + .equipment-slider::before {
+    transform: translateX(30px);
+}
+
+.equipment-label {
+    flex: 1;
+    font-weight: 600;
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.equipment-price {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+.equipment-toggle:hover .equipment-slider {
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .equipment-selector {
+        padding: 1rem;
+    }
+    
+    .equipment-toggle {
+        flex-wrap: wrap;
+    }
+    
+    .equipment-label {
+        font-size: 0.9rem;
+    }
+    
+    .equipment-price {
+        font-size: 1rem;
+        width: 100%;
+        text-align: right;
+        margin-top: 0.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .mobile-menu-btn {
         display: block;

@@ -575,6 +575,7 @@ function filterBookings() {
 
 let selectedRoom = 'conference';
 let selectedSlots = [];
+let withEquipmentAdmin = true; // It stays true by default
 const roomData = {
     conference: { name: 'Конференц-зал', price: 10000 },
     studio: { name: 'Контент-студия', price: 10000 },
@@ -596,6 +597,14 @@ function openNewBookingModal() {
     document.getElementById('editingBookingId').value = '';
     selectedSlots = [];
     updateSelectedSlots();
+
+    const equipmentSelector = document.getElementById('withEquipmentAdmin');
+    if (equipmentSelector && selectedRoom === 'conference') {
+        equipmentSelector.style.display = 'block';
+        document.getElementById('equipmentCheckboxAdmin').checked = true;
+        withEquipmentAdmin = true;
+    }
+
     generateTimetable();
 
     setTimeout(setupPhoneInput, 100);
@@ -692,10 +701,24 @@ window.onclick = function (event) {
 }
 
 function selectRoom(room) {
+
     selectedRoom = room;
     document.querySelectorAll('.room-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
+
+    const equipmentSelector = document.getElementById('withEquipmentAdmin');
+    if (equipmentSelector && room === 'conference') {
+        equipmentSelector.style.display = 'block';
+    } else if (equipmentSelector) {
+        equipmentSelector.style.display = 'none';
+    }
+
     generateTimetable();
+}
+
+function toggleEquipment() {
+    withEquipmentAdmin = document.getElementById('withEquipmentAdminCheckbox').checked;
+    console.log('With Equipment:', withEquipmentAdmin ? 'With' : 'Without');
 }
 
 async function generateTimetable() {
@@ -855,9 +878,11 @@ document.getElementById('adminBookingForm').addEventListener('submit', async fun
     selectedSlots.forEach(slot => {
         const hour = parseInt(slot.hour.split(':')[0]);
         let price = roomData[selectedRoom].price;
-        if (selectedRoom === 'studio' && hour >= 19) {
-            // Assuming that the edit is manual, there's no need in this logic
+
+        if (selectedRoom === 'conference' && withEquipmentAdmin) {
+            price += 2000; 
         }
+
         totalCost += price;
     });
 
@@ -875,6 +900,7 @@ document.getElementById('adminBookingForm').addEventListener('submit', async fun
         remaining_amount: 0,
         deposit_amount: totalCost,
         additional_notes: notes,
+        with_equipment: selectedRoom === 'conference' ? withEquipmentAdmin : null,
         booking_status: 'confirmed',
         payment_status: 'admin_created',
         confirmed_at: new Date().toISOString()
@@ -994,7 +1020,7 @@ function editBooking(id) {
             btn.classList.remove('active');
         }
     });
-    // Better way to select room button:
+
     document.querySelectorAll('.room-btn').forEach(btn => {
         btn.classList.remove('active');
         if (btn.getAttribute('onclick').includes(`'${selectedRoom}'`)) {
@@ -1005,7 +1031,14 @@ function editBooking(id) {
     // Set slots
     selectedSlots = booking.time_slots || [];
     updateSelectedSlots();
-    generateTimetable(); // Will mark selected slots
+
+    if (booking.room_type === 'conference' && booking.with_equipment !== undefined) {
+        document.getElementById('equipmentCheckboxAdmin').checked = booking.with_equipment;
+        withEquipmentAdmin = booking.with_equipment;
+        document.getElementById('withEquipmentAdmin').style.display = 'block';
+    }
+
+    generateTimetable();
 
     setTimeout(setupPhoneInput, 100);
 }

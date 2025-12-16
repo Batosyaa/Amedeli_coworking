@@ -358,14 +358,15 @@ class PhotoCarousel {
 
 let selectedRoom = 'conference';
 let selectedSlots = [];
+let withEquipment = true; // It stays true by default
 const roomData = {
     conference: { 
         name: { ru: 'Конференц-зал', kz: 'Конференц-зал', en: 'Conference Hall' },
-        price: '10,000₸/час'
+        price: '10,000₸ - 12,000₸/час'
     },
     studio: { 
         name: { ru: 'Контент-студия', kz: 'Контент-студия', en: 'Content Studio' },
-        price: '8,000₸ - 10,000₸/час'
+        price: '10,000₸ - 12,000₸/час'
     },
     'meeting-a': { 
         name: { ru: 'Переговорная A', kz: 'Келіссөз бөлмесі A', en: 'Meeting Room A' },
@@ -410,7 +411,20 @@ function selectRoom(room) {
     document.querySelectorAll('.room-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
     document.getElementById('selectedRoom').value = roomData[room].name[currentLang];
+
+    const equipmentSelector = document.getElementById('equipmentSelector');
+    if (room === 'conference' || room === 'studio') {
+        equipmentSelector.style.display = 'block';
+    } else {
+        equipmentSelector.style.display = 'none';
+    }
+
     generateTimetable();
+}
+
+function toggleEquipment() {
+    withEquipment = document.getElementById('equipmentCheckbox').checked;
+    console.log('With equipment: ', withEquipment ? 'With' : 'Without');
 }
 
 async function generateTimetable() {
@@ -613,12 +627,19 @@ async function calculateBookingCost(roomType, timeSlots, menuItems) {
 
         let roomCost = 0;
         timeSlots.forEach(slot => {
+
             const hour = parseInt(slot.hour.split(':')[0]);
+            let slotPrice = room.price_per_hour;
+
             if (roomType == 'studio' && hour >= 19) {
-                roomCost += room.price_after_7pm || room.price_per_hour;
-            } else {
-                roomCost += room.price_per_hour;
+                slotPrice += room.price_after_7pm || room.price_per_hour;
             }
+
+            if (roomType === 'conference' & withEquipment) {
+                slotPrice += 2000;
+            }
+
+            roomCost += slotPrice;
         });
 
         let menuCost = 0;
@@ -736,6 +757,7 @@ document.getElementById('bookingForm').addEventListener('submit', async function
                 remaining_amount: pricing.remainingAmount,
                 menu_preorder: formData.menu.length > 0 ? formData.menu : null,
                 additional_notes: formData.notes || null,
+                with_quipment: selectedRoom === 'conference' ? withEquipment : null,
                 payment_status: 'pending',
                 booking_status: 'pending',
                 payment_expires_at: paymentExpiry.toISOString()
@@ -815,6 +837,11 @@ document.addEventListener('DOMContentLoaded', function() {
     generateTimetable();
     generateMenuPreorder();
     document.getElementById('selectedRoom').value = roomData[selectedRoom].name[currentLang];
+
+    const equipmentSelector = document.getElementById('equipmentSelector');
+    if (selectedRoom === 'conference') {
+        equipmentSelector.style.display = 'block';
+    }
 
     new PhotoCarousel();
 });
